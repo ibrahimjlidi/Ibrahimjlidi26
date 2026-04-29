@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ibrahim Jlidi - CV</title>
+  <style>
+    body { margin: 0; padding: 0; font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #eceff4; color: #111827; }
+    .page { width: 210mm; min-height: 297mm; margin: 0 auto; padding: 24mm; box-sizing: border-box; background: #fff; }
+    .header { display: grid; grid-template-columns: 120px 1fr; gap: 24px; align-items: center; margin-bottom: 24px; }
+    .avatar { width: 120px; height: 120px; object-fit: cover; border-radius: 18px; border: 2px solid #e2e8f0; }
+    .header-info { display: flex; flex-direction: column; justify-content: center; gap: 10px; }
+    .name { font-size: 32px; font-weight: 800; margin: 0; color: #111827; }
+    .title { font-size: 16px; margin: 0; color: #111827; letter-spacing: 0.08em; text-transform: uppercase; }
+    .contact-list { display: grid; grid-template-columns: 1fr; gap: 8px; font-size: 12px; color: #4b5563; }
+    .contact-item { display: flex; align-items: center; gap: 8px; }
+    .contact-item span { color: #475569; }
+    .contact-item a { color: #111827; text-decoration: none; }
+    .section { margin-bottom: 22px; }
+    .section-title { font-size: 16px; margin: 0 0 14px 0; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #111827; border-bottom: 1px solid #e2e8f0; padding-bottom: 6px; }
+    .summary { margin: 16px 0 0; font-size: 13px; line-height: 1.7; color: #334155; }
+    .item { margin-bottom: 16px; }
+    .item-header { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .item-title { font-size: 14px; font-weight: 700; margin: 0; color: #111827; }
+    .item-meta { font-size: 12px; color: #64748b; margin: 4px 0 10px; }
+    .item-text { font-size: 13px; color: #334155; line-height: 1.75; margin: 0; }
+    .bullet-list { list-style: none; padding-left: 0; margin: 8px 0 0; }
+    .bullet-list li { position: relative; padding-left: 20px; margin-bottom: 8px; font-size: 13px; line-height: 1.75; color: #334155; }
+    .bullet-list li:before { content: '–'; position: absolute; left: 0; top: 0; color: #2563eb; font-weight: bold; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+    .tag { background: #eff6ff; color: #1d4ed8; font-size: 12px; padding: 4px 10px; border-radius: 999px; }
+    .footer { font-size: 11px; color: #64748b; margin-top: 32px; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <img src="/avatar.png" alt="Ibrahim Jlidi" class="avatar" />
+      <div class="header-info">
+        <div>
+          <h1 class="name">Ibrahim Jlidi</h1>
+          <p class="title">Full Stack Developer</p>
+        </div>
+        <div class="contact-list">
+          <div class="contact-item"><span>📞</span><span>+21623844641</span></div>
+          <div class="contact-item"><span>✉️</span><span>ibrahimjlidi23@gmail.com</span></div>
+          <div class="contact-item"><span>🌐</span><a href="https://ibrahimjlidi-portfolio.netlify.app">ibrahimjlidi-portfolio.netlify.app</a></div>
+          <div class="contact-item"><span>🐙</span><a href="https://github.com/ibrahimjlidi">github.com/ibrahimjlidi</a></div>
+          <div class="contact-item"><span>🔗</span><a href="https://linkedin.com/in/ibrahimjlidi">linkedin.com/in/ibrahimjlidi</a></div>
+        </div>
+      </div>
+    </header>
+
+    <section class="section">
+      <h2 class="section-title">Summary</h2>
+      <p class="summary">Full Stack Developer with solid experience in Adobe Commerce (Magento 2) and Hyvä Theme frontend development. Skilled in JavaScript, Alpine.js, Tailwind CSS, and PHP. Hands-on experience with CMS blocks, widgets, and search integrations. Passionate about building performant, responsive, and user-centered e-commerce experiences.</p>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Education</h2>
+      <div class="item">
+        <div class="item-header">
+          <p class="item-title">Master’s in Software Engineering and Knowledge</p>
+          <p class="item-meta">September 2019 - August 2021 • ISIMED, Medenine</p>
+        </div>
+        <p class="item-text">Focused on advanced web technologies and enterprise application design. Hands-on experience with ReactJS, Angular, and HTML/CSS/JAVASCRIPT.</p>
+      </div>
+      <div class="item">
+        <div class="item-header">
+          <p class="item-title">Bachelor’s in Computer Science</p>
+          <p class="item-meta">September 2015 - June 2018 • ISIMED, Medenine</p>
+        </div>
+        <p class="item-text">Strong foundation in Java, PHP, and web development.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Professional Experience</h2>
+      <div class="item">
+        <div class="item-header">
+          <p class="item-title">Instructor | Designet (Remote)</p>
+          <p class="item-meta">January 2025 – Present</p>
+        </div>
+        <ul class="bullet-list">
+          <li>MERN Stack Training.</li>
+          <li>Conducted online MERN stack training sessions covering REST APIs, state management, and deployment.</li>
+          <li>Guided students in building real-world applications using MongoDB, Express.js, React, and Node.js.</li>
+        </ul>
+      </div>
+      <div class="item">
+        <div class="item-header">
+          <p class="item-title">Freelance Developer | Weecode (Remote)</p>
+          <p class="item-meta">November 2023 – Present</p>
+        </div>
+        <ul class="bullet-list">
+          <li>Developed and maintained full-stack web and mobile projects for international clients.</li>
+          <li>Collaborated with design teams and handled project debugging, code review, and optimization.</li>
+        </ul>
+      </div>
+      <div class="item">
+        <div class="item-header">
+          <p class="item-title">Web Developer | IoTechnologies (Medenine / Remote)</p>
+          <p class="item-meta">September 2022 – Present</p>
+        </div>
+        <ul class="bullet-list">
+          <li>Developed and maintained Magento 2 e-commerce applications with a focus on the Hyvä frontend framework.</li>
+          <li>Implemented modern, responsive UIs using Tailwind CSS and Alpine.js.</li>
+          <li>Integrated Algolia Search and Autocomplete for advanced product discovery.</li>
+          <li>Created custom Hyvä widgets and CMS blocks (Magefan Blog, banners, sliders).</li>
+          <li>Designed and implemented a responsive multi-level mobile mega menu using Alpine.js.</li>
+          <li>Optimized performance, accessibility, and SEO metrics (Lighthouse audits).</li>
+          <li>Atol.fr Project: Magento-based e-commerce platform with custom Tailwind design and module integrations.</li>
+          <li>Elite-Auto.fr Project: Angular + NestJS automotive platform with Tailwind styling and secure REST APIs.</li>
+        </ul>
+      </div>
+      <div class="item">
+        <div class="item-header">
+          <p class="item-title">Freelance Developer | Personal Projects (Remote)</p>
+          <p class="item-meta">June 2020 – August 2022</p>
+        </div>
+        <ul class="bullet-list">
+          <li>Designed and developed custom websites and small business applications for local clients.</li>
+          <li>Built responsive frontends using HTML, CSS, JavaScript, and Tailwind CSS.</li>
+          <li>Integrated PHP backends and REST APIs for user management and contact systems.</li>
+          <li>Created custom CMS themes and landing pages for improved user experience and branding.</li>
+          <li>Worked directly with clients for requirement gathering, UI/UX improvements, and deployment.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Projects</h2>
+      <div class="item">
+        <div class="item-header">
+          <p class="item-title">Custom Hyvä Widgets and CMS Blocks</p>
+        </div>
+        <p class="item-text">Developed reusable Hyvä widgets (banners, buttons, sliders) with Alpine.js and Tailwind CSS. Integrated Magefan Blog widgets and CMS blocks for dynamic content management in Magento 2.</p>
+        <div class="tags">
+          <span class="tag">Magento 2</span>
+          <span class="tag">PHP</span>
+          <span class="tag">Hyvä Theme</span>
+          <span class="tag">Alpine.js</span>
+          <span class="tag">Tailwind CSS</span>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-header">
+          <p class="item-title">Mobile Mega Menu Integration</p>
+        </div>
+        <p class="item-text">Implemented a responsive multi-level mega menu with Alpine.js, handling submenu navigation and CMS-driven content for Magento Hyvä.</p>
+        <div class="tags">
+          <span class="tag">Magento 2</span>
+          <span class="tag">Hyvä</span>
+          <span class="tag">Alpine.js</span>
+          <span class="tag">Tailwind CSS</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Technical Skills</h2>
+      <p class="item-text"><strong>Frontend:</strong> Tailwind CSS, Alpine.js, React.js, Angular, HTML5, CSS3, JavaScript</p>
+      <p class="item-text"><strong>Backend:</strong> PHP, Node.js, Express.js, NestJS</p>
+      <p class="item-text"><strong>CMS / E-commerce:</strong> Magento 2, Hyvä Theme, WordPress, Magefan Blog</p>
+      <p class="item-text"><strong>Tools:</strong> Git, GitHub, GitLab, Docker, VS Code, Postman</p>
+      <p class="item-text"><strong>Databases:</strong> MySQL, PostgreSQL, MongoDB</p>
+      <p class="item-text"><strong>Other:</strong> REST APIs, Performance Optimization, SEO Best Practices</p>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Languages</h2>
+      <ul class="bullet-list">
+        <li>Arabic – Native</li>
+        <li>English – Intermediate (Good reading/writing, improving speaking)</li>
+        <li>French – Intermediate (Good reading/writing, improving speaking)</li>
+        <li>Italian – A1/A2 Level</li>
+      </ul>
+    </section>
+
+    <footer class="footer">
+      Generated from the Ibrahim Jlidi CV template.
+    </footer>
+  </div>
+</body>
+</html>

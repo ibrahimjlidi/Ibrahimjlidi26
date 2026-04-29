@@ -192,7 +192,7 @@ const Hero = () => {
             <a href="#projects" className="px-8 py-3.5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-medium rounded-full hover:bg-slate-800 dark:hover:bg-slate-100 transition-all shadow-lg hover:-translate-y-1">
               View Work
             </a>
-            <a href="#" className="px-8 py-3.5 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-medium rounded-full border border-slate-200 dark:border-slate-700 hover:border-primary-500 hover:text-primary-600 dark:hover:text-primary-400 transition-all flex items-center gap-2 group shadow-sm hover:shadow-md hover:-translate-y-1">
+            <a href="/ibrahim_jlidi.pdf" download className="px-8 py-3.5 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-medium rounded-full border border-slate-200 dark:border-slate-700 hover:border-primary-500 hover:text-primary-600 dark:hover:text-primary-400 transition-all flex items-center gap-2 group shadow-sm hover:shadow-md hover:-translate-y-1">
               <Download size={18} className="group-hover:animate-bounce" /> Download CV
             </a>
           </motion.div>
