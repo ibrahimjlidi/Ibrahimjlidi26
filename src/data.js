@@ -147,6 +147,51 @@ export const projects = [
     tech: ["MongoDB", "Express.js", "React", "Node.js"],
     status: "Completed",
     link: "#"
+  },
+  {
+    id: 5,
+    title: "Movie Metro",
+    category: "Frontend",
+    description: "A movie discovery and search app with clean visual browsing for films and shows.",
+    tech: ["React", "Tailwind CSS", "APIs", "Netlify"],
+    status: "Completed",
+    link: "https://movie-metro.netlify.app"
+  },
+  {
+    id: 6,
+    title: "Safoua Academy",
+    category: "Full Stack",
+    description: "Developing an educational platform for online learning and student management.",
+    tech: ["React", "Node.js", "MongoDB", "Tailwind CSS"],
+    status: "In Progress",
+    link: "#"
+  },
+  {
+    id: 7,
+    title: "SmartBabySitterCare",
+    category: "Full Stack",
+    description: "Building a caregiver matching and scheduling solution for parents and sitters.",
+    tech: ["React", "Express.js", "MongoDB", "Tailwind CSS"],
+    status: "In Progress",
+    link: "#"
+  },
+  {
+    id: 8,
+    title: "GreenLife",
+    category: "Full Stack",
+    description: "Creating a sustainability platform focused on healthy living and eco-friendly products.",
+    tech: ["React", "Node.js", "MongoDB", "Tailwind CSS"],
+    status: "In Progress",
+    link: "#"
+  },
+  {
+    id: 9,
+    title: "MedTourMedical",
+    category: "Full Stack",
+    description: "Developing a medical tourism marketplace for patient journeys and provider connections.",
+    tech: ["React", "Express.js", "MongoDB", "Tailwind CSS"],
+    status: "In Progress",
+    link: "#"
   }
 ];
 
