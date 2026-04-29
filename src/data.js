@@ -3,6 +3,7 @@ import { Code2, Server, Database, Wrench, GraduationCap, Briefcase, Mail, MapPin
 export const personalInfo = {
   name: "Ibrahim Jlidi",
   title: "Magento / Full Stack Developer",
+  titleFr: "Développeur Full Stack",
   tagline: "E-commerce & Feature Teams Specialist",
   email: "ibrahimjlidi23@gmail.com",
   phone: "+216 23 84 46 41",
@@ -10,7 +11,8 @@ export const personalInfo = {
   website: "https://ibrahimjlidi-portfolio.netlify.app",
   github: "https://github.com/ibrahimjlidi",
   linkedin: "https://linkedin.com/in/ibrahimjlidi",
-  about: "Magento (Adobe Commerce) Full Stack Developer with experience contributing to international e-commerce platforms within feature teams. Specialized in Hyvä frontend architecture, performance optimization, and scalable component design using PHP, Alpine.js, and Tailwind CSS. Also experienced in full-stack development using the MERN stack (MongoDB, Express.js, React, Node.js). Comfortable working in agile environments, contributing to production systems, and delivering maintainable, business-oriented solutions."
+  about: "Magento (Adobe Commerce) Full Stack Developer with experience contributing to international e-commerce platforms within feature teams. Specialized in Hyvä frontend architecture, performance optimization, and scalable component design using PHP, Alpine.js, and Tailwind CSS. Also experienced in full-stack development using the MERN stack (MongoDB, Express.js, React, Node.js). Comfortable working in agile environments, contributing to production systems, and delivering maintainable, business-oriented solutions.",
+  aboutFr: "Développeur Full Stack Adobe Commerce (Magento) avec une expérience sur des plateformes e-commerce internationales au sein de Feature Teams. Spécialisé dans l'architecture frontend Hyvä, l'optimisation des performances et la conception de composants évolutifs avec PHP, Alpine.js et Tailwind CSS. Expérience également en développement full stack MERN (MongoDB, Express.js, React, Node.js). À l'aise dans les environnements agiles pour livrer des solutions maintenables et orientées métier."
 };
 
 export const skills = [

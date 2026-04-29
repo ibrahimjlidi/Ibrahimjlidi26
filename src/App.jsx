@@ -24,6 +24,61 @@ const LinkedinIcon = ({ size = 24 }) => (
 
 // --- Components ---
 
+const translations = {
+  en: {
+    home: 'Home',
+    about: 'About',
+    experience: 'Experience',
+    skills: 'Technical Skills',
+    projects: 'Projects',
+    contact: 'Contact',
+    hello: "Hello, I'm",
+    viewWork: 'View Work',
+    downloadCV: 'Download CV',
+    letsTalk: "Let's Talk",
+    aboutMe: 'About Me',
+    location: 'Location',
+    email: 'Email',
+    language: 'Language',
+    english: 'EN',
+    french: 'FR',
+    featuredProjects: 'Featured Projects',
+    education: 'Education',
+    readyToWork: 'Ready to work together?',
+    availableForWork: "I'm currently available for freelance work and open to new opportunities. Let's build something amazing.",
+    sayHello: 'Say Hello',
+    completed: 'Completed',
+    inProgress: 'In Progress',
+    viewDetails: 'View Details'
+  },
+  fr: {
+    home: 'Accueil',
+    about: 'À propos',
+    experience: 'Expérience',
+    skills: 'Compétences techniques',
+    projects: 'Projets',
+    contact: 'Contact',
+    hello: "Bonjour, je suis",
+    viewWork: 'Voir mes projets',
+    downloadCV: 'Télécharger CV',
+    letsTalk: 'Contactez-moi',
+    aboutMe: 'À propos de moi',
+    location: 'Localisation',
+    email: 'Email',
+    language: 'Langue',
+    english: 'EN',
+    french: 'FR',
+    featuredProjects: 'Projets en vedette',
+    education: 'Formation',
+    readyToWork: 'Prêt à travailler ensemble ?',
+    availableForWork: "Je suis actuellement disponible en freelance et ouvert à de nouvelles opportunités. Construisons quelque chose d'incroyable.",
+    sayHello: 'Contactez-moi',
+    completed: 'Terminé',
+    inProgress: 'En cours',
+    viewDetails: 'Voir les détails'
+  }
+};
+
 const SectionHeading = ({ children, icon: Icon }) => (
   <motion.div 
     initial={{ opacity: 0, y: 20 }}
@@ -38,7 +93,7 @@ const SectionHeading = ({ children, icon: Icon }) => (
   </motion.div>
 );
 
-const Navbar = ({ darkMode, setDarkMode }) => {
+const Navbar = ({ darkMode, setDarkMode, locale, setLocale }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -48,12 +103,14 @@ const Navbar = ({ darkMode, setDarkMode }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const t = translations[locale];
+
   const navLinks = [
-    { name: 'About', href: '#about' },
-    { name: 'Experience', href: '#experience' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Contact', href: '#contact' },
+    { name: t.about, href: '#about' },
+    { name: t.experience, href: '#experience' },
+    { name: t.skills, href: '#skills' },
+    { name: t.projects, href: '#projects' },
+    { name: t.contact, href: '#contact' },
   ];
 
   return (
@@ -82,21 +139,42 @@ const Navbar = ({ darkMode, setDarkMode }) => {
             >
               {darkMode ? <Sun size={20} /> : <Moon size={20} />}
             </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setLocale('en')}
+                className={`px-3 py-2 rounded-full text-sm ${locale === 'en' ? 'bg-primary-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'}`}
+              >
+                EN
+              </button>
+              <button
+                onClick={() => setLocale('fr')}
+                className={`px-3 py-2 rounded-full text-sm ${locale === 'fr' ? 'bg-primary-600 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'}`}
+              >
+                FR
+              </button>
+            </div>
             <a 
               href="#contact" 
               className="px-5 py-2.5 bg-primary-600 hover:bg-primary-700 text-white text-sm font-medium rounded-full transition-all hover:shadow-lg hover:-translate-y-0.5"
             >
-              Let's Talk
+              {t.letsTalk}
             </a>
           </div>
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center gap-4">
-            <button 
+              <button 
               onClick={() => setDarkMode(!darkMode)} 
               className="p-2 text-slate-600 dark:text-slate-300"
             >
               {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+            </button>
+            <button
+              onClick={() => setLocale(locale === 'en' ? 'fr' : 'en')}
+              className="px-3 py-2 rounded-full text-sm bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300"
+              aria-label="Toggle Language"
+            >
+              {locale === 'en' ? 'FR' : 'EN'}
             </button>
             <button 
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -134,7 +212,10 @@ const Navbar = ({ darkMode, setDarkMode }) => {
   );
 };
 
-const Hero = () => {
+const Hero = ({ locale }) => {
+  const t = translations[locale];
+  const title = locale === 'fr' ? personalInfo.titleFr || personalInfo.title : personalInfo.title;
+
   return (
     <section id="hero" className="min-h-screen flex items-center justify-center relative pt-20 overflow-hidden">
       {/* Background decoration */}
@@ -162,7 +243,7 @@ const Hero = () => {
             transition={{ delay: 0.2 }}
             className="text-primary-600 dark:text-primary-400 font-semibold tracking-wide uppercase mb-3"
           >
-            Hello, I'm
+            {t.hello}
           </motion.p>
           
           <motion.h1 
@@ -180,7 +261,7 @@ const Hero = () => {
             transition={{ delay: 0.4 }}
             className="text-2xl md:text-3xl text-slate-600 dark:text-slate-300 font-medium mb-8 max-w-2xl"
           >
-            {personalInfo.title}
+            {title}
           </motion.h2>
 
           <motion.div 
@@ -190,10 +271,10 @@ const Hero = () => {
             className="flex flex-wrap justify-center gap-4"
           >
             <a href="#projects" className="px-8 py-3.5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-medium rounded-full hover:bg-slate-800 dark:hover:bg-slate-100 transition-all shadow-lg hover:-translate-y-1">
-              View Work
+              {t.viewWork}
             </a>
             <a href="/ibrahim_jlidi.pdf" download className="px-8 py-3.5 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-medium rounded-full border border-slate-200 dark:border-slate-700 hover:border-primary-500 hover:text-primary-600 dark:hover:text-primary-400 transition-all flex items-center gap-2 group shadow-sm hover:shadow-md hover:-translate-y-1">
-              <Download size={18} className="group-hover:animate-bounce" /> Download CV
+              <Download size={18} className="group-hover:animate-bounce" /> {t.downloadCV}
             </a>
           </motion.div>
 
@@ -211,11 +292,13 @@ const Hero = () => {
   );
 };
 
-const About = () => {
+const About = ({ locale }) => {
+  const t = translations[locale];
+
   return (
     <section id="about" className="py-24 bg-slate-50 dark:bg-slate-900/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionHeading icon={User}>About Me</SectionHeading>
+        <SectionHeading icon={User}>{t.aboutMe}</SectionHeading>
         
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <motion.div 
@@ -224,18 +307,18 @@ const About = () => {
             viewport={{ once: true }}
             className="prose dark:prose-invert prose-lg text-slate-600 dark:text-slate-300"
           >
-            <p className="leading-relaxed">{personalInfo.about}</p>
+            <p className="leading-relaxed">{locale === 'fr' ? personalInfo.aboutFr : personalInfo.about}</p>
             
             <div className="mt-8 grid grid-cols-2 gap-6">
               <div>
                 <h4 className="font-semibold text-slate-900 dark:text-white mb-2 flex items-center gap-2">
-                  <MapPin size={18} className="text-primary-500" /> Location
+                  <MapPin size={18} className="text-primary-500" /> {t.location}
                 </h4>
                 <p>{personalInfo.location}</p>
               </div>
               <div>
                 <h4 className="font-semibold text-slate-900 dark:text-white mb-2 flex items-center gap-2">
-                  <Mail size={18} className="text-primary-500" /> Email
+                  <Mail size={18} className="text-primary-500" /> {t.email}
                 </h4>
                 <p className="truncate"><a href={`mailto:${personalInfo.email}`} className="hover:text-primary-500 transition-colors">{personalInfo.email}</a></p>
               </div>
@@ -261,11 +344,13 @@ const About = () => {
   );
 };
 
-const Experience = () => {
+const Experience = ({ locale }) => {
+  const t = translations[locale];
+
   return (
     <section id="experience" className="py-24 relative">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionHeading icon={Briefcase}>Experience</SectionHeading>
+        <SectionHeading icon={Briefcase}>{t.experience}</SectionHeading>
         
         <div className="space-y-12">
           {experience.map((exp, index) => (
@@ -314,11 +399,13 @@ const Experience = () => {
   );
 };
 
-const Skills = () => {
+const Skills = ({ locale }) => {
+  const t = translations[locale];
+
   return (
     <section id="skills" className="py-24 bg-slate-50 dark:bg-slate-900/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionHeading icon={Code2}>Technical Skills</SectionHeading>
+        <SectionHeading icon={Code2}>{t.skills}</SectionHeading>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {skills.map((skillGroup, idx) => {
@@ -357,7 +444,8 @@ const Skills = () => {
   );
 };
 
-const Projects = () => {
+const Projects = ({ locale }) => {
+  const t = translations[locale];
   const [filter, setFilter] = useState('All');
   const categories = ['All', ...new Set(projects.map(p => p.category))];
   
@@ -367,7 +455,7 @@ const Projects = () => {
     <section id="projects" className="py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-          <SectionHeading icon={Monitor}>Featured Projects</SectionHeading>
+          <SectionHeading icon={Monitor}>{t.featuredProjects}</SectionHeading>
           
           <div className="flex flex-wrap gap-2 pb-2">
             {categories.map(cat => (
@@ -423,9 +511,9 @@ const Projects = () => {
               <div className="bg-slate-50 dark:bg-slate-900/50 px-8 py-3 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-sm">
                 <span className="text-slate-500 flex items-center gap-1.5">
                   <div className={`w-2 h-2 rounded-full ${project.status === 'Completed' ? 'bg-emerald-500' : 'bg-amber-500 animate-pulse'}`}></div>
-                  {project.status}
+                  {project.status === 'Completed' ? t.completed : t.inProgress}
                 </span>
-                <a href={project.link} onClick={(e) => {if(project.link === '#') e.preventDefault();}} className="font-medium text-primary-600 dark:text-primary-400 hover:underline">View Details</a>
+                <a href={project.link} onClick={(e) => {if(project.link === '#') e.preventDefault();}} className="font-medium text-primary-600 dark:text-primary-400 hover:underline">{t.viewDetails}</a>
               </div>
             </motion.div>
           ))}
@@ -435,11 +523,13 @@ const Projects = () => {
   );
 };
 
-const Education = () => {
+const Education = ({ locale }) => {
+  const t = translations[locale];
+
   return (
     <section className="py-24 bg-slate-50 dark:bg-slate-900/50">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionHeading icon={GraduationCap}>Education</SectionHeading>
+        <SectionHeading icon={GraduationCap}>{t.education}</SectionHeading>
         
         <div className="space-y-6">
           {education.map((edu, idx) => (
@@ -466,7 +556,9 @@ const Education = () => {
   );
 };
 
-const Contact = () => {
+const Contact = ({ locale }) => {
+  const t = translations[locale];
+
   return (
     <section id="contact" className="py-24 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -476,14 +568,14 @@ const Contact = () => {
           viewport={{ once: true }}
           className="bg-gradient-to-br from-primary-600 to-indigo-800 rounded-3xl p-8 md:p-16 text-center text-white shadow-2xl"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to work together?</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">{t.readyToWork}</h2>
           <p className="text-primary-100 text-lg md:text-xl max-w-2xl mx-auto mb-10">
-            I'm currently available for freelance work and open to new opportunities. Let's build something amazing.
+            {t.availableForWork}
           </p>
           
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
             <a href={`mailto:${personalInfo.email}`} className="px-8 py-4 bg-white text-primary-700 font-bold rounded-full hover:bg-slate-50 transition-all hover:-translate-y-1 w-full sm:w-auto shadow-lg flex items-center justify-center gap-2">
-              <Mail size={20} /> Say Hello
+              <Mail size={20} /> {t.sayHello}
             </a>
             <div className="flex gap-4 w-full sm:w-auto justify-center">
               <a href={personalInfo.github} target="_blank" rel="noreferrer" className="p-4 bg-white/10 hover:bg-white/20 rounded-full backdrop-blur-sm transition-all hover:-translate-y-1 text-white">
@@ -515,6 +607,7 @@ const Footer = () => (
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
+  const [locale, setLocale] = useState('en');
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
@@ -541,16 +634,16 @@ function App() {
         style={{ scaleX }}
       />
       
-      <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
+      <Navbar darkMode={darkMode} setDarkMode={setDarkMode} locale={locale} setLocale={setLocale} />
       
       <main>
-        <Hero />
-        <About />
-        <Experience />
-        <Skills />
-        <Projects />
-        <Education />
-        <Contact />
+        <Hero locale={locale} />
+        <About locale={locale} />
+        <Experience locale={locale} />
+        <Skills locale={locale} />
+        <Projects locale={locale} />
+        <Education locale={locale} />
+        <Contact locale={locale} />
       </main>
       
       <Footer />
