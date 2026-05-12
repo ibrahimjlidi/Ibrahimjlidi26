@@ -212,6 +212,24 @@ export const projects = [
     tech: ["React", "Node.js", "Tailwind CSS", "AI Integration", "Gemini API"],
     status: "Completed",
     link: "https://projects-template.netlify.app/"
+  },
+  {
+    id: 12,
+    title: "City's Weather App",
+    category: "Frontend",
+    description: "A weather application that allows users to search for real-time weather information by city name. Built with React for a responsive and interactive user experience.",
+    tech: ["React", "Weather API", "Tailwind CSS", "Netlify"],
+    status: "Completed",
+    link: "https://citys-weather.netlify.app/"
+  },
+  {
+    id: 13,
+    title: "Mental Calcul - Math Learning Platform",
+    category: "Frontend",
+    description: "An interactive Arabic educational platform designed for 5th-grade students to practice and improve mental math skills. Engaging and user-friendly interface for mathematics learning.",
+    tech: ["React", "Arabic Localization", "Educational App"],
+    status: "Completed",
+    link: "https://mentalcalcul.netlify.app/"
   }
 ];
 
