@@ -194,6 +194,24 @@ export const projects = [
     tech: ["React", "Express.js", "MongoDB", "Tailwind CSS"],
     status: "In Progress",
     link: "#"
+  },
+  {
+    id: 10,
+    title: "Express.js API Documentation Guide",
+    category: "Backend",
+    description: "Comprehensive API documentation site for Node.js and Express.js backend development. Includes authentication, endpoints, error handling, and best practices with code examples.",
+    tech: ["Node.js", "Express.js", "API Documentation", "REST APIs"],
+    status: "Completed",
+    link: "https://node-express-guid.netlify.app/"
+  },
+  {
+    id: 11,
+    title: "MediTravel - Medical Tourism Platform",
+    category: "Full Stack",
+    description: "A comprehensive medical tourism platform featuring clinic discovery, specialty search, and AI-powered coordination. Integrated with Gemini AI for document translation and personalized care itineraries.",
+    tech: ["React", "Node.js", "Tailwind CSS", "AI Integration", "Gemini API"],
+    status: "Completed",
+    link: "https://projects-template.netlify.app/"
   }
 ];
 
