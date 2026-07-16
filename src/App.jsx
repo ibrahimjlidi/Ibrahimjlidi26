@@ -447,11 +447,15 @@ const Skills = ({ locale }) => {
 const Projects = ({ locale }) => {
   const t = translations[locale];
   const [filter, setFilter] = useState('All');
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
   const categories = ['All', ...new Set(projects.map(p => p.category))];
   
   const filteredProjects = filter === 'All' ? projects : projects.filter(p => p.category === filter);
+  const placeholderImage = 'https://placehold.co/1200x800/0f172a/ffffff?text=Project+Preview';
 
   return (
+    <>
     <section id="projects" className="py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
@@ -485,14 +489,23 @@ const Projects = ({ locale }) => {
               transition={{ duration: 0.3 }}
               className="group bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden hover:shadow-xl transition-all flex flex-col"
             >
+              <div className="overflow-hidden">
+                <img
+                  src={project.image || project.screenshots?.[0] || placeholderImage}
+                  alt={project.title}
+                  className="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
               <div className="p-8 flex-1">
                 <div className="flex justify-between items-start mb-4">
                   <div className="text-xs font-bold tracking-wider uppercase text-primary-500 mb-2">
                     {project.category}
                   </div>
-                  <a href={project.link} className="text-slate-400 hover:text-primary-500 transition-colors">
-                    <ExternalLink size={20} />
-                  </a>
+                  {project.link !== '#' ? (
+                    <a href={project.link} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-primary-500 transition-colors">
+                      <ExternalLink size={20} />
+                    </a>
+                  ) : null}
                 </div>
                 <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                   {project.title}
@@ -513,13 +526,98 @@ const Projects = ({ locale }) => {
                   <div className={`w-2 h-2 rounded-full ${project.status === 'Completed' ? 'bg-emerald-500' : 'bg-amber-500 animate-pulse'}`}></div>
                   {project.status === 'Completed' ? t.completed : t.inProgress}
                 </span>
-                <a href={project.link} onClick={(e) => {if(project.link === '#') e.preventDefault();}} className="font-medium text-primary-600 dark:text-primary-400 hover:underline">{t.viewDetails}</a>
+                <button
+                  type="button"
+                  onClick={() => setSelectedProject(project)}
+                  className="font-medium text-primary-600 dark:text-primary-400 hover:underline"
+                >
+                  {t.viewDetails}
+                </button>
               </div>
             </motion.div>
           ))}
         </div>
       </div>
     </section>
+
+    {selectedProject && (
+      <div className="fixed inset-0 z-[60] flex items-center justify-center bg-slate-950/80 px-4 py-8" onClick={() => { setSelectedProject(null); setActiveImageIndex(0); }}>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="w-full max-w-4xl rounded-3xl border border-slate-200 bg-white p-0 shadow-2xl dark:border-slate-700 dark:bg-slate-900"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="flex items-center justify-between border-b border-slate-200 px-6 py-4 dark:border-slate-700">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary-500">{selectedProject.category}</p>
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-white">{selectedProject.title}</h3>
+            </div>
+            <button type="button" onClick={() => { setSelectedProject(null); setActiveImageIndex(0); }} className="rounded-full p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">
+              <X size={20} />
+            </button>
+          </div>
+          <div className="grid gap-6 p-6 lg:grid-cols-[1.1fr_0.9fr]">
+            <div className="overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-700">
+              <div className="relative">
+                <img
+                  src={(selectedProject.screenshots && selectedProject.screenshots[activeImageIndex]) || selectedProject.image || placeholderImage}
+                  alt={selectedProject.title}
+                  className="h-full w-full object-cover"
+                />
+                {selectedProject.screenshots && selectedProject.screenshots.length > 1 && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => setActiveImageIndex((prev) => (prev === 0 ? selectedProject.screenshots.length - 1 : prev - 1))}
+                      className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-slate-950/70 p-2 text-white"
+                    >
+                      ←
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setActiveImageIndex((prev) => (prev === selectedProject.screenshots.length - 1 ? 0 : prev + 1))}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-slate-950/70 p-2 text-white"
+                    >
+                      →
+                    </button>
+                  </>
+                )}
+              </div>
+            </div>
+            <div className="flex flex-col justify-between">
+              <div>
+                <p className="mb-4 text-slate-600 dark:text-slate-300">{selectedProject.description}</p>
+                <div className="mb-6 flex flex-wrap gap-2">
+                  {selectedProject.tech.map((tech, i) => (
+                    <span key={i} className="rounded-full bg-slate-100 px-3 py-1 text-sm text-slate-700 dark:bg-slate-800 dark:text-slate-300">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+                <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-800/50">
+                  <p className="text-sm font-semibold text-slate-900 dark:text-white">Preview</p>
+                  <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+                    {selectedProject.link !== '#' ? 'View the live project or explore the full experience.' : 'This project is currently in progress and the live link is not available yet.'}
+                  </p>
+                </div>
+              </div>
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+                {selectedProject.link !== '#' ? (
+                  <a href={selectedProject.link} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center rounded-full bg-primary-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-primary-700">
+                    Visit Site
+                  </a>
+                ) : null}
+                <button type="button" onClick={() => { setSelectedProject(null); setActiveImageIndex(0); }} className="inline-flex items-center justify-center rounded-full border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-slate-600 dark:text-slate-200 dark:hover:bg-slate-800">
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    )}
+    </>
   );
 };
 

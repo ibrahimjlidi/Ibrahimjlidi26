@@ -116,15 +116,28 @@ export const education = [
 export const projects = [
   {
     id: 1,
+    title: "EduInsight",
+    category: "Full Stack",
+    description: "An educational platform focused on student learning, course management, and engaging digital experiences.",
+    tech: ["React", "Node.js", "MongoDB", "Tailwind CSS"],
+    status: "In Progress",
+    link: "https://edu-insight.vercel.app/",
+    image: "/screenshots/edun.JPG",
+    screenshots: ["/screenshots/edun.JPG", "/screenshots/edun2.JPG","/screenshots/edun3.JPG"]
+  },
+  {
+    id: 2,
     title: "E-commerce Web Application (MERN)",
     category: "Full Stack",
     description: "Developing a full-stack e-commerce platform with modern architecture and scalable design. Implemented product management, authentication, and dynamic data handling.",
     tech: ["MongoDB", "Express.js", "React", "Node.js"],
     status: "In Progress",
-    link: "https://eshop-eco.vercel.app/"
+    link: "https://eshop-eco.vercel.app/",
+    image: "/screenshots/shop.JPG",
+    screenshots: ["/screenshots/shop.JPG"]
   },
   {
-    id: 2,
+    id: 3,
     title: "Hyvä CMS Components System",
     category: "Magento",
     description: "Developed reusable Magento components enabling dynamic content management. Focused on scalability and maintainability for business users.",
@@ -133,16 +146,25 @@ export const projects = [
     link: "#"
   },
   {
-    id: 3,
-    title: "Mobile Mega Menu (Hyvä)",
+    id: 4,
+    title: "Custom Hyvä Widgets and CMS Blocks",
     category: "Magento",
-    description: "Built a scalable multi-level mega menu with CMS-driven structure for modern Magento storefronts.",
-    tech: ["Magento 2", "Alpine.js"],
+    description: "Developed reusable Hyvä widgets and CMS blocks for dynamic Magento content management, with a focus on maintainability and business usability.",
+    tech: ["Magento 2", "PHP", "Hyvä Theme", "Alpine.js", "Tailwind CSS"],
     status: "Completed",
     link: "#"
   },
   {
-    id: 4,
+    id: 5,
+    title: "Mobile Mega Menu Integration",
+    category: "Magento",
+    description: "Implemented a responsive multi-level mega menu with Alpine.js and Magento Hyvä, supporting CMS-driven content for desktop and mobile storefronts.",
+    tech: ["Magento 2", "Hyvä", "Alpine.js", "Tailwind CSS"],
+    status: "Completed",
+    link: "#"
+  },
+  {
+    id: 6,
     title: "MERN Applications",
     category: "Full Stack",
     description: "Developed various full-stack apps with authentication and REST APIs.",
@@ -151,85 +173,101 @@ export const projects = [
     link: "#"
   },
   {
-    id: 5,
+    id: 7,
     title: "Movie Metro",
     category: "Frontend",
     description: "A movie discovery and search app with clean visual browsing for films and shows.",
     tech: ["React", "Tailwind CSS", "APIs", "Netlify"],
     status: "Completed",
-    link: "https://movie-metro.netlify.app"
+    link: "https://movie-metro.netlify.app",
+    image: "/screenshots/movie.JPG",
+    screenshots: ["/screenshots/movie.JPG"]
   },
   {
-    id: 6,
+    id: 8,
     title: "Safoua Academy",
     category: "Full Stack",
     description: "Developing an educational platform for online learning and student management.",
     tech: ["React", "Node.js", "MongoDB", "Tailwind CSS"],
     status: "In Progress",
-    link: "#"
+    link: "https://safoua-academy.vercel.app",
+    image: "/screenshots/safwa.JPG",
+    screenshots: ["/screenshots/safwa.JPG", "/screenshots/safwa2.JPG"]
   },
   {
-    id: 7,
+    id: 9,
     title: "SmartBabySitterCare",
     category: "Full Stack",
     description: "Building a caregiver matching and scheduling solution for parents and sitters.",
     tech: ["React", "Express.js", "MongoDB", "Tailwind CSS"],
     status: "In Progress",
-    link: "#"
+    link: "https://smartbabsittercare.vercel.app"
   },
   {
-    id: 8,
+    id: 10,
     title: "GreenLife",
     category: "Full Stack",
     description: "Creating a sustainability platform focused on healthy living and eco-friendly products.",
     tech: ["React", "Node.js", "MongoDB", "Tailwind CSS"],
     status: "In Progress",
-    link: "#"
+    link: "https://greenlife-web-l30d.onrender.com/",
+    image: "/screenshots/green.JPG",
+    screenshots: ["/screenshots/green.JPG", "/screenshots/green2.JPG", "/screenshots/green3.JPG", "/screenshots/green4.JPG"]
   },
   {
-    id: 9,
-    title: "MedTourMedical",
+    id: 11,
+    title: "AiCoach",
     category: "Full Stack",
-    description: "Developing a medical tourism marketplace for patient journeys and provider connections.",
+    description: "Developing a personalized AI coaching platform for fitness and wellness guidance.",
     tech: ["React", "Express.js", "MongoDB", "Tailwind CSS"],
     status: "In Progress",
-    link: "#"
+    link: "https://aicoach-phi-mocha.vercel.app/login",
+    image: "/screenshots/aicoach.JPG",
+    screenshots: ["/screenshots/aicoach.JPG", "/screenshots/aicoach2.JPG", "/screenshots/aicoach3.JPG", "/screenshots/aicoach4.JPG", "/screenshots/aicoach5.JPG", "/screenshots/aicoach6.JPG", "/screenshots/aicoach7.JPG"]
   },
   {
-    id: 10,
+    id: 12,
     title: "Express.js API Documentation Guide",
     category: "Backend",
     description: "Comprehensive API documentation site for Node.js and Express.js backend development. Includes authentication, endpoints, error handling, and best practices with code examples.",
     tech: ["Node.js", "Express.js", "API Documentation", "REST APIs"],
     status: "Completed",
-    link: "https://node-express-guid.netlify.app/"
+    link: "https://node-express-guid.netlify.app/",
+    image: "/screenshots/node.JPG",
+    screenshots: ["/screenshots/node.JPG", "/screenshots/node2.JPG", "/screenshots/node3.JPG"]
   },
   {
-    id: 11,
+    id: 13,
     title: "MediTravel - Medical Tourism Platform",
     category: "Full Stack",
     description: "A comprehensive medical tourism platform featuring clinic discovery, specialty search, and AI-powered coordination. Integrated with Gemini AI for document translation and personalized care itineraries.",
     tech: ["React", "Node.js", "Tailwind CSS", "AI Integration", "Gemini API"],
     status: "Completed",
-    link: "https://projects-template.netlify.app/"
+    link: "https://projects-template.netlify.app/",
+    image: "/screenshots/medtour.JPG",
+    screenshots: ["/screenshots/medtour.JPG", "/screenshots/medtour2.JPG", "/screenshots/medtour3.JPG", "/screenshots/medtour4.JPG", "/screenshots/medtour5.JPG"]
   },
   {
-    id: 12,
+    id: 14,
     title: "City's Weather App",
     category: "Frontend",
     description: "A weather application that allows users to search for real-time weather information by city name. Built with React for a responsive and interactive user experience.",
     tech: ["React", "Weather API", "Tailwind CSS", "Netlify"],
     status: "Completed",
-    link: "https://citys-weather.netlify.app/"
+    link: "https://citys-weather.netlify.app/",
+    image: "/screenshots/weather.JPG",
+    screenshots: ["/screenshots/weather.JPG"]
   },
   {
-    id: 13,
+    id: 15,
     title: "Mental Calcul - Math Learning Platform",
     category: "Frontend",
     description: "An interactive Arabic educational platform designed for 5th-grade students to practice and improve mental math skills. Engaging and user-friendly interface for mathematics learning.",
     tech: ["React", "Arabic Localization", "Educational App"],
     status: "Completed",
-    link: "https://mentalcalcul.netlify.app/"
+    link: "https://mentalcalcul.netlify.app/",
+    image: "/screenshots/mental.JPG",
+    screenshots: ["/screenshots/mental.JPG", "/screenshots/mental2.JPG", "/screenshots/mental3.JPG", "/screenshots/mental4.JPG", "/screenshots/mental5.JPG"]
   }
 ];
 
