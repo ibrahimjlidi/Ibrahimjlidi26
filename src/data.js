@@ -123,7 +123,7 @@ export const projects = [
     status: "In Progress",
     link: "https://edu-insight.vercel.app/",
     image: "/screenshots/edun.JPG",
-    screenshots: ["/screenshots/edun.JPG", "/screenshots/edun2.JPG","/screenshots/edun3.JPG"]
+    screenshots: ["/screenshots/edun.JPG", "/screenshots/edun2.JPG", "/screenshots/edun3.JPG"]
   },
   {
     id: 2,
@@ -138,42 +138,17 @@ export const projects = [
   },
   {
     id: 3,
-    title: "Hyvä CMS Components System",
+    title: "Hyvä CMS Components System (Atol.fr)",
     category: "Magento",
     description: "Developed reusable Magento components enabling dynamic content management. Focused on scalability and maintainability for business users.",
     tech: ["Magento 2", "PHP", "Hyvä", "Alpine.js", "Tailwind CSS"],
     status: "Completed",
-    link: "#"
+    link: "https://www.atol.fr",
+    image: "/screenshots/atol.JPG",
+    screenshots: ["/screenshots/atol.JPG", "/screenshots/atol2.JPG", "/screenshots/atol3.JPG"]
   },
   {
     id: 4,
-    title: "Custom Hyvä Widgets and CMS Blocks",
-    category: "Magento",
-    description: "Developed reusable Hyvä widgets and CMS blocks for dynamic Magento content management, with a focus on maintainability and business usability.",
-    tech: ["Magento 2", "PHP", "Hyvä Theme", "Alpine.js", "Tailwind CSS"],
-    status: "Completed",
-    link: "#"
-  },
-  {
-    id: 5,
-    title: "Mobile Mega Menu Integration",
-    category: "Magento",
-    description: "Implemented a responsive multi-level mega menu with Alpine.js and Magento Hyvä, supporting CMS-driven content for desktop and mobile storefronts.",
-    tech: ["Magento 2", "Hyvä", "Alpine.js", "Tailwind CSS"],
-    status: "Completed",
-    link: "#"
-  },
-  {
-    id: 6,
-    title: "MERN Applications",
-    category: "Full Stack",
-    description: "Developed various full-stack apps with authentication and REST APIs.",
-    tech: ["MongoDB", "Express.js", "React", "Node.js"],
-    status: "Completed",
-    link: "#"
-  },
-  {
-    id: 7,
     title: "Movie Metro",
     category: "Frontend",
     description: "A movie discovery and search app with clean visual browsing for films and shows.",
@@ -184,7 +159,7 @@ export const projects = [
     screenshots: ["/screenshots/movie.JPG"]
   },
   {
-    id: 8,
+    id: 5,
     title: "Safoua Academy",
     category: "Full Stack",
     description: "Developing an educational platform for online learning and student management.",
@@ -195,16 +170,7 @@ export const projects = [
     screenshots: ["/screenshots/safwa.JPG", "/screenshots/safwa2.JPG"]
   },
   {
-    id: 9,
-    title: "SmartBabySitterCare",
-    category: "Full Stack",
-    description: "Building a caregiver matching and scheduling solution for parents and sitters.",
-    tech: ["React", "Express.js", "MongoDB", "Tailwind CSS"],
-    status: "In Progress",
-    link: "https://smartbabsittercare.vercel.app"
-  },
-  {
-    id: 10,
+    id: 6,
     title: "GreenLife",
     category: "Full Stack",
     description: "Creating a sustainability platform focused on healthy living and eco-friendly products.",
@@ -215,7 +181,7 @@ export const projects = [
     screenshots: ["/screenshots/green.JPG", "/screenshots/green2.JPG", "/screenshots/green3.JPG", "/screenshots/green4.JPG"]
   },
   {
-    id: 11,
+    id: 7,
     title: "AiCoach",
     category: "Full Stack",
     description: "Developing a personalized AI coaching platform for fitness and wellness guidance.",
@@ -226,7 +192,7 @@ export const projects = [
     screenshots: ["/screenshots/aicoach.JPG", "/screenshots/aicoach2.JPG", "/screenshots/aicoach3.JPG", "/screenshots/aicoach4.JPG", "/screenshots/aicoach5.JPG", "/screenshots/aicoach6.JPG", "/screenshots/aicoach7.JPG"]
   },
   {
-    id: 12,
+    id: 8,
     title: "Express.js API Documentation Guide",
     category: "Backend",
     description: "Comprehensive API documentation site for Node.js and Express.js backend development. Includes authentication, endpoints, error handling, and best practices with code examples.",
@@ -237,7 +203,7 @@ export const projects = [
     screenshots: ["/screenshots/node.JPG", "/screenshots/node2.JPG", "/screenshots/node3.JPG"]
   },
   {
-    id: 13,
+    id: 9,
     title: "MediTravel - Medical Tourism Platform",
     category: "Full Stack",
     description: "A comprehensive medical tourism platform featuring clinic discovery, specialty search, and AI-powered coordination. Integrated with Gemini AI for document translation and personalized care itineraries.",
@@ -248,7 +214,7 @@ export const projects = [
     screenshots: ["/screenshots/medtour.JPG", "/screenshots/medtour2.JPG", "/screenshots/medtour3.JPG", "/screenshots/medtour4.JPG", "/screenshots/medtour5.JPG"]
   },
   {
-    id: 14,
+    id: 10,
     title: "City's Weather App",
     category: "Frontend",
     description: "A weather application that allows users to search for real-time weather information by city name. Built with React for a responsive and interactive user experience.",
@@ -259,7 +225,7 @@ export const projects = [
     screenshots: ["/screenshots/weather.JPG"]
   },
   {
-    id: 15,
+    id: 11,
     title: "Mental Calcul - Math Learning Platform",
     category: "Frontend",
     description: "An interactive Arabic educational platform designed for 5th-grade students to practice and improve mental math skills. Engaging and user-friendly interface for mathematics learning.",
@@ -268,6 +234,17 @@ export const projects = [
     link: "https://mentalcalcul.netlify.app/",
     image: "/screenshots/mental.JPG",
     screenshots: ["/screenshots/mental.JPG", "/screenshots/mental2.JPG", "/screenshots/mental3.JPG", "/screenshots/mental4.JPG", "/screenshots/mental5.JPG"]
+  },
+  {
+    id: 12,
+    title: "FuelStationERP Tunisia",
+    category: "Full Stack",
+    description: "A completed MERN stack fuel station ERP for Tunisia, featuring station management, pumps, products, purchases, expenses, and role-based access control.",
+    tech: ["MongoDB", "Express.js", "React", "Node.js", "Tailwind CSS"],
+    status: "Completed",
+    link: "http://kisok-tunisia.duckdns.org/",
+    image: "/screenshots/capt4.JPG",
+    screenshots: ["/screenshots/capt1.JPG", "/screenshots/capt2.JPG", "/screenshots/capt3.JPG", "/screenshots/capt4.JPG"]
   }
 ];
 
