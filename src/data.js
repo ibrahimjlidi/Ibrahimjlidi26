@@ -2,17 +2,17 @@ import { Code2, Server, Database, Wrench, GraduationCap, Briefcase, Mail, MapPin
 
 export const personalInfo = {
   name: "Ibrahim Jlidi",
-  title: "Magento / Full Stack Developer",
-  titleFr: "Développeur Full Stack",
-  tagline: "E-commerce & Feature Teams Specialist",
+  title: "AI & Full Stack Developer",
+  titleFr: "Développeur Full Stack & IA",
+  tagline: "AI-driven web apps, E-commerce & Feature Teams Specialist",
   email: "ibrahimjlidi23@gmail.com",
   phone: "+216 23 84 46 41",
   location: "Medenine / Remote",
   website: "https://ibrahimjlidi-portfolio.netlify.app",
   github: "https://github.com/ibrahimjlidi",
   linkedin: "https://linkedin.com/in/ibrahimjlidi",
-  about: "Magento (Adobe Commerce) Full Stack Developer with experience contributing to international e-commerce platforms within feature teams. Specialized in Hyvä frontend architecture, performance optimization, and scalable component design using PHP, Alpine.js, and Tailwind CSS. Also experienced in full-stack development using the MERN stack (MongoDB, Express.js, React, Node.js). Comfortable working in agile environments, contributing to production systems, and delivering maintainable, business-oriented solutions.",
-  aboutFr: "Développeur Full Stack Adobe Commerce (Magento) avec une expérience sur des plateformes e-commerce internationales au sein de Feature Teams. Spécialisé dans l'architecture frontend Hyvä, l'optimisation des performances et la conception de composants évolutifs avec PHP, Alpine.js et Tailwind CSS. Expérience également en développement full stack MERN (MongoDB, Express.js, React, Node.js). À l'aise dans les environnements agiles pour livrer des solutions maintenables et orientées métier."
+  about: "AI & Magento (Adobe Commerce) Full Stack Developer with experience building AI-driven web applications, performing web vulnerability audits, and contributing to international e-commerce platforms within feature teams. Specialized in Hyvä frontend architecture, performance optimization, and scalable component design using PHP, Alpine.js, and Tailwind CSS. Experienced with LLM integrations, prompt engineering, and AI-based automation. Also experienced in full-stack development using the MERN stack (MongoDB, Express, React, Node.js). Comfortable working in agile environments, delivering maintainable, business-oriented solutions.",
+  aboutFr: "Développeur Full Stack & IA (Adobe Commerce / Magento) avec expérience dans la création d'applications web pilotées par l'IA, les audits de vulnérabilités web, et la contribution à des plateformes e-commerce internationales. Spécialisé en architecture frontend Hyvä, optimisation des performances et conception de composants évolutifs avec PHP, Alpine.js et Tailwind CSS. Expérience des intégrations LLM et du prompt engineering. À l'aise dans les environnements agiles pour livrer des solutions maintenables et orientées métier."
 };
 
 export const skills = [
@@ -41,6 +41,12 @@ export const skills = [
     icon: Wrench,
     items: ["Git", "GitHub", "GitLab", "Docker", "Postman", "Jira", "Agile/Scrum", "Feature Team collaboration"]
   }
+  ,
+  {
+    category: "AI & Security",
+    icon: Wrench,
+    items: ["LLMs (GPT)", "Prompt Engineering", "AI Integration", "Web Vulnerability Auditing", "Security Best Practices"]
+  }
 ];
 
 export const experience = [
@@ -53,6 +59,8 @@ export const experience = [
     description: [
       "Contributed to Magento 2 (Adobe Commerce) projects as part of a feature team",
       "Developed scalable UI components using Hyvä Theme, Tailwind CSS, and Alpine.js",
+      "Implemented AI-powered features and integrations (LLMs, prompt engineering) in client projects",
+      "Conducted web vulnerability audits and implemented remediations to improve security posture",
       "Collaborated with backend developers, designers, and stakeholders",
       "Integrated Algolia Search (Autocomplete + InstantSearch)",
       "Built reusable CMS-driven components (widgets, sliders, banners)",
@@ -116,14 +124,14 @@ export const education = [
 export const projects = [
   {
     id: 1,
-    title: "EduInsight",
-    category: "Full Stack",
-    description: "An educational platform focused on student learning, course management, and engaging digital experiences.",
-    tech: ["React", "Node.js", "MongoDB", "Tailwind CSS"],
-    status: "In Progress",
-    link: "https://edu-insight.vercel.app/",
-    image: "/screenshots/edun.JPG",
-    screenshots: ["/screenshots/edun.JPG", "/screenshots/edun2.JPG", "/screenshots/edun3.JPG"]
+    title: "AI Career Coach",
+    category: "AI / Web",
+    description: "An AI-driven career coach that offers interview preparation, CV feedback, and personalized career advice.",
+    tech: ["React", "AI", "Tailwind CSS"],
+    status: "Deployed",
+    link: "https://ai-career-coach-seven-beta.vercel.app/",
+    image: "/screenshots/Ai-Career.JPG",
+    screenshots: ["/screenshots/Ai-Career.JPG"]
   },
   {
     id: 2,
@@ -245,6 +253,30 @@ export const projects = [
     link: "http://kisok-tunisia.duckdns.org/",
     image: "/screenshots/capt4.JPG",
     screenshots: ["/screenshots/capt1.JPG", "/screenshots/capt2.JPG", "/screenshots/capt3.JPG", "/screenshots/capt4.JPG"]
+  }
+  ,
+   {
+    id: 13,
+    title: "EduInsight",
+    category: "Full Stack",
+    description: "An educational platform focused on student learning, course management, and engaging digital experiences.",
+    tech: ["React", "Node.js", "MongoDB", "Tailwind CSS"],
+    status: "In Progress",
+    link: "https://edu-insight.vercel.app/",
+    image: "/screenshots/edun.JPG",
+    screenshots: ["/screenshots/edun.JPG", "/screenshots/edun2.JPG", "/screenshots/edun3.JPG"]
+  },
+ 
+  {
+    id: 14,
+    title: "AI Web Vulnerability Audit System",
+    category: "AI / Security",
+    description: "A web vulnerability auditing system enhanced by AI to detect common security issues and suggest remediations.",
+    tech: ["React", "AI", "Security"],
+    status: "Deployed",
+    link: "https://ai-web-vulnerability-audit-system.vercel.app/",
+    image: "/screenshots/audit.JPG",
+    screenshots: ["/screenshots/audit.JPG", "/screenshots/audit2.JPG"]
   }
 ];
 
