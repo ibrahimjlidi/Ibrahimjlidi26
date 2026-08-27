@@ -277,6 +277,28 @@ export const projects = [
     link: "https://ai-web-vulnerability-audit-system.vercel.app/",
     image: "/screenshots/audit.JPG",
     screenshots: ["/screenshots/audit.JPG", "/screenshots/audit2.JPG"]
+  },
+  {
+    id: 15,
+    title: "Security Audit Platform",
+    category: "AI / Security",
+    description: "A modern security-focused platform for identifying vulnerabilities, reviewing web risks, and recommending actionable safeguards.",
+    tech: ["React", "AI", "Security", "Vulnerability Review"],
+    status: "Deployed",
+    link: "https://security-tau-seven-51.vercel.app/",
+    image: "https://placehold.co/1200x800/0f172a/ffffff?text=Security+Audit",
+    screenshots: ["https://placehold.co/1200x800/0f172a/ffffff?text=Security+Audit"]
+  },
+  {
+    id: 16,
+    title: "AI RAG Assistant",
+    category: "AI / RAG",
+    description: "An AI-powered retrieval assistant for grounded question answering, document discovery, and contextual insights.",
+    tech: ["React", "AI", "RAG", "Tailwind CSS"],
+    status: "Deployed",
+    link: "https://rag-five-alpha.vercel.app/",
+    image: "/screenshots/rag.JPG",
+    screenshots: ["/screenshots/rag.JPG", "/screenshots/rag2.JPG"]
   }
 ];
 
