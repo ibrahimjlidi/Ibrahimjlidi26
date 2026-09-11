@@ -716,6 +716,34 @@ const Contact = ({ locale, personalInfo }) => {
 const STORAGE_KEY = 'portfolio_telegram_blocked_v1';
 const COOKIE_NAME = 'portfolio_owner_session';
 
+const skillIconMap = {
+  Code2,
+  Server,
+  Database,
+  Wrench,
+  GraduationCap,
+  Briefcase,
+  Mail,
+  MapPin,
+  Phone,
+  Globe
+};
+
+const normalizeSkillGroup = (group) => {
+  if (!group || typeof group !== 'object') return { category: 'Skills', items: [], icon: Code2 };
+
+  const iconKey = typeof group.icon === 'string' ? group.icon : group.icon?.displayName || group.icon?.name;
+  const resolvedIcon = typeof group.icon === 'function'
+    ? group.icon
+    : skillIconMap[iconKey] || Code2;
+
+  return {
+    ...group,
+    items: Array.isArray(group.items) ? group.items : [],
+    icon: resolvedIcon
+  };
+};
+
 const isOwnerBlocked = () => {
   if (typeof window === 'undefined') return true;
 
@@ -1440,12 +1468,13 @@ function App() {
     }
   });
   const [skills, setSkills] = useState(() => {
-    if (typeof window === 'undefined') return defaultSkills;
+    if (typeof window === 'undefined') return defaultSkills.map(normalizeSkillGroup);
     try {
       const saved = localStorage.getItem('portfolio-skills');
-      return saved ? JSON.parse(saved) : defaultSkills;
+      const parsed = saved ? JSON.parse(saved) : defaultSkills;
+      return Array.isArray(parsed) ? parsed.map(normalizeSkillGroup) : defaultSkills.map(normalizeSkillGroup);
     } catch {
-      return defaultSkills;
+      return defaultSkills.map(normalizeSkillGroup);
     }
   });
   const [adminOpen, setAdminOpen] = useState(false);
@@ -1469,7 +1498,14 @@ function App() {
   }, [education]);
 
   useEffect(() => {
-    localStorage.setItem('portfolio-skills', JSON.stringify(skills));
+    const sanitizedSkills = Array.isArray(skills)
+      ? skills.map((group) => normalizeSkillGroup(group))
+      : [];
+
+    localStorage.setItem('portfolio-skills', JSON.stringify(sanitizedSkills.map((group) => ({
+      ...group,
+      icon: typeof group.icon === 'function' ? group.icon.displayName || group.icon.name || 'Code2' : 'Code2'
+    }))));
   }, [skills]);
 
   // Handle system dark mode preference on initial load
