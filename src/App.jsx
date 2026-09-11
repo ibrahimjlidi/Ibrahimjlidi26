@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { 
-  Mail, Download, ChevronDown, 
-  ExternalLink, Code2, Monitor, Database, User, 
-  Briefcase, GraduationCap, Moon, Sun, Menu, X, MapPin,
-  Shield, Save, Plus, Trash2, Lock, Pencil
+  Mail, Download, ChevronDown, ExternalLink, Code2, Monitor, Database,
+  User, Briefcase, GraduationCap, Moon, Sun, Menu, X, MapPin,
+  Shield, Save, Plus, Trash2, Lock, Pencil, Server, Wrench,
+  Phone, Globe
 } from 'lucide-react';
 import {
   personalInfo as defaultPersonalInfo,
