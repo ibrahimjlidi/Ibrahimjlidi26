@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
-import { useTelegramVisitNotifier } from './useTelegramVisitNotifier';
 import { 
   Mail, Download, ChevronDown, 
   ExternalLink, Code2, Monitor, Database, User, 
@@ -714,6 +713,65 @@ const Contact = ({ locale, personalInfo }) => {
   );
 };
 
+const STORAGE_KEY = 'portfolio_telegram_blocked_v1';
+const COOKIE_NAME = 'portfolio_owner_session';
+
+const isOwnerBlocked = () => {
+  if (typeof window === 'undefined') return true;
+
+  const hasStorageFlag = localStorage.getItem(STORAGE_KEY) === '1';
+  const hasCookieFlag = document.cookie.split('; ').some((cookie) => cookie.startsWith(`${COOKIE_NAME}=1`));
+
+  return hasStorageFlag || hasCookieFlag;
+};
+
+const setOwnerBlocked = () => {
+  if (typeof window === 'undefined') return;
+
+  localStorage.setItem(STORAGE_KEY, '1');
+  document.cookie = `${COOKIE_NAME}=1; Max-Age=31536000; Path=/; SameSite=Lax`;
+};
+
+const isProductionHost = (hostname) => {
+  if (!hostname) return false;
+  if (hostname === 'localhost' || hostname === '127.0.0.1') return false;
+  if (hostname.includes('git-') || hostname.includes('-preview') || hostname.includes('preview')) return false;
+
+  return hostname.endsWith('vercel.app');
+};
+
+const notifyTelegramVisit = async () => {
+  if (typeof window === 'undefined') return;
+  if (isOwnerBlocked()) return;
+  if (!isProductionHost(window.location.hostname)) return;
+
+  const payload = {
+    url: window.location.href,
+    referrer: document.referrer || 'direct',
+    userAgent: navigator.userAgent,
+    language: navigator.language,
+    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || 'unknown',
+    screen: `${window.screen.width}x${window.screen.height}`
+  };
+
+  try {
+    const endpoint = import.meta.env.PROD ? '/api/telegram-visit' : 'http://localhost:3000/api/telegram-visit';
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    const result = await response.json();
+
+    if (result.ok) {
+      setOwnerBlocked();
+    }
+  } catch (error) {
+    console.error('Telegram notification failed:', error);
+  }
+};
+
 const makeEmptyProject = () => ({
   id: Date.now(),
   title: '',
@@ -1339,7 +1397,9 @@ const Footer = ({ personalInfo }) => (
 );
 
 function App() {
-  useTelegramVisitNotifier();
+  useEffect(() => {
+    notifyTelegramVisit();
+  }, []);
 
   const [darkMode, setDarkMode] = useState(false);
   const [locale, setLocale] = useState('en');
