@@ -3,9 +3,17 @@ import { motion, useScroll, useSpring } from 'framer-motion';
 import { 
   Mail, Download, ChevronDown, 
   ExternalLink, Code2, Monitor, Database, User, 
-  Briefcase, GraduationCap, Moon, Sun, Menu, X, MapPin
+  Briefcase, GraduationCap, Moon, Sun, Menu, X, MapPin,
+  Shield, Save, Plus, Trash2, Lock, Pencil
 } from 'lucide-react';
-import { personalInfo, skills, experience, education, projects, languages } from './data';
+import {
+  personalInfo as defaultPersonalInfo,
+  skills as defaultSkills,
+  experience as defaultExperience,
+  education as defaultEducation,
+  projects as defaultProjects,
+  languages
+} from './data';
 
 // --- Custom Icons ---
 const GithubIcon = ({ size = 24 }) => (
@@ -93,7 +101,7 @@ const SectionHeading = ({ children, icon: Icon }) => (
   </motion.div>
 );
 
-const Navbar = ({ darkMode, setDarkMode, locale, setLocale }) => {
+const Navbar = ({ darkMode, setDarkMode, locale, setLocale, personalInfo, onAdminClick }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -139,6 +147,13 @@ const Navbar = ({ darkMode, setDarkMode, locale, setLocale }) => {
             >
               {darkMode ? <Sun size={20} /> : <Moon size={20} />}
             </button>
+            <button
+              type="button"
+              onClick={onAdminClick}
+              className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-700 transition hover:border-primary-500 hover:text-primary-600 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200"
+            >
+              <Shield size={16} /> Admin
+            </button>
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setLocale('en')}
@@ -168,6 +183,14 @@ const Navbar = ({ darkMode, setDarkMode, locale, setLocale }) => {
               className="p-2 text-slate-600 dark:text-slate-300"
             >
               {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+            </button>
+            <button
+              type="button"
+              onClick={onAdminClick}
+              className="rounded-full border border-slate-200 bg-white p-2 text-slate-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200"
+              aria-label="Open admin panel"
+            >
+              <Shield size={18} />
             </button>
             <button
               onClick={() => setLocale(locale === 'en' ? 'fr' : 'en')}
@@ -212,7 +235,7 @@ const Navbar = ({ darkMode, setDarkMode, locale, setLocale }) => {
   );
 };
 
-const Hero = ({ locale }) => {
+const Hero = ({ locale, personalInfo }) => {
   const t = translations[locale];
   const title = locale === 'fr' ? personalInfo.titleFr || personalInfo.title : personalInfo.title;
 
@@ -292,7 +315,7 @@ const Hero = ({ locale }) => {
   );
 };
 
-const About = ({ locale }) => {
+const About = ({ locale, personalInfo }) => {
   const t = translations[locale];
 
   return (
@@ -344,7 +367,7 @@ const About = ({ locale }) => {
   );
 };
 
-const Experience = ({ locale }) => {
+const Experience = ({ locale, experience }) => {
   const t = translations[locale];
 
   return (
@@ -399,7 +422,7 @@ const Experience = ({ locale }) => {
   );
 };
 
-const Skills = ({ locale }) => {
+const Skills = ({ locale, skills }) => {
   const t = translations[locale];
 
   return (
@@ -444,12 +467,12 @@ const Skills = ({ locale }) => {
   );
 };
 
-const Projects = ({ locale }) => {
+const Projects = ({ locale, projects }) => {
   const t = translations[locale];
   const [filter, setFilter] = useState('All');
   const [selectedProject, setSelectedProject] = useState(null);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
-  const categories = ['All', ...new Set(projects.map(p => p.category))];
+  const categories = ['All', ...(projects ? [...new Set(projects.map(p => p.category))] : [])];
   
   const filteredProjects = filter === 'All' ? projects : projects.filter(p => p.category === filter);
   const placeholderImage = 'https://placehold.co/1200x800/0f172a/ffffff?text=Project+Preview';
@@ -621,7 +644,7 @@ const Projects = ({ locale }) => {
   );
 };
 
-const Education = ({ locale }) => {
+const Education = ({ locale, education }) => {
   const t = translations[locale];
 
   return (
@@ -654,7 +677,7 @@ const Education = ({ locale }) => {
   );
 };
 
-const Contact = ({ locale }) => {
+const Contact = ({ locale, personalInfo }) => {
   const t = translations[locale];
 
   return (
@@ -690,7 +713,618 @@ const Contact = ({ locale }) => {
   );
 };
 
-const Footer = () => (
+const makeEmptyProject = () => ({
+  id: Date.now(),
+  title: '',
+  category: 'Full Stack',
+  description: '',
+  tech: [],
+  status: 'In Progress',
+  link: '#',
+  image: '',
+  screenshots: []
+});
+
+const makeEmptyExperience = () => ({
+  id: Date.now(),
+  role: '',
+  company: '',
+  date: '',
+  location: '',
+  description: []
+});
+
+const makeEmptyEducation = () => ({
+  id: Date.now(),
+  degree: '',
+  school: '',
+  date: ''
+});
+
+const makeEmptySkillGroup = () => ({
+  category: '',
+  items: [],
+  icon: 'Code2'
+});
+
+const AdminPanel = ({
+  personalInfo,
+  setPersonalInfo,
+  projects,
+  setProjects,
+  experience,
+  setExperience,
+  education,
+  setEducation,
+  skills,
+  setSkills,
+  onClose,
+  darkMode
+}) => {
+  const [password, setPassword] = useState('');
+  const [isUnlocked, setIsUnlocked] = useState(false);
+  const [formMessage, setFormMessage] = useState('');
+  const [personalForm, setPersonalForm] = useState(personalInfo);
+  const [projectDraft, setProjectDraft] = useState(makeEmptyProject());
+  const [editingProjectId, setEditingProjectId] = useState(null);
+  const [experienceDraft, setExperienceDraft] = useState(makeEmptyExperience());
+  const [editingExperienceId, setEditingExperienceId] = useState(null);
+  const [educationDraft, setEducationDraft] = useState(makeEmptyEducation());
+  const [editingEducationId, setEditingEducationId] = useState(null);
+  const [skillDraft, setSkillDraft] = useState(makeEmptySkillGroup());
+  const [editingSkillCategory, setEditingSkillCategory] = useState(null);
+
+  useEffect(() => {
+    setPersonalForm(personalInfo);
+  }, [personalInfo]);
+
+  const handleLogin = () => {
+    const adminPassword = 'admin2026';
+    if (password === adminPassword) {
+      setIsUnlocked(true);
+      setFormMessage('Access granted.');
+      setPassword('');
+    } else {
+      setFormMessage('Wrong password. Use admin2026.');
+    }
+  };
+
+  const handlePersonalSave = (event) => {
+    event.preventDefault();
+    setPersonalInfo({ ...personalForm });
+    setFormMessage('Personal information saved.');
+  };
+
+  const handleProjectSave = (event) => {
+    event.preventDefault();
+
+    const normalizedProject = {
+      ...projectDraft,
+      id: Number(projectDraft.id) || Date.now(),
+      tech: Array.isArray(projectDraft.tech)
+        ? projectDraft.tech
+        : String(projectDraft.tech || '')
+            .split(',')
+            .map((item) => item.trim())
+            .filter(Boolean),
+      screenshots: Array.isArray(projectDraft.screenshots)
+        ? projectDraft.screenshots
+        : String(projectDraft.screenshots || '')
+            .split(',')
+            .map((item) => item.trim())
+            .filter(Boolean),
+      image: projectDraft.image || (projectDraft.screenshots?.[0] || '')
+    };
+
+    if (!normalizedProject.title.trim()) {
+      setFormMessage('Project title is required.');
+      return;
+    }
+
+    if (editingProjectId) {
+      setProjects((current) =>
+        current.map((project) => (project.id === editingProjectId ? normalizedProject : project))
+      );
+      setFormMessage('Project updated successfully.');
+    } else {
+      setProjects((current) => [{ ...normalizedProject, id: Date.now() }, ...current]);
+      setFormMessage('New project added.');
+    }
+
+    setProjectDraft(makeEmptyProject());
+    setEditingProjectId(null);
+  };
+
+  const handleEditProject = (project) => {
+    setEditingProjectId(project.id);
+    setProjectDraft({
+      ...project,
+      tech: Array.isArray(project.tech) ? project.tech : String(project.tech || '').split(',').map((item) => item.trim()).filter(Boolean),
+      screenshots: Array.isArray(project.screenshots) ? project.screenshots : String(project.screenshots || '').split(',').map((item) => item.trim()).filter(Boolean)
+    });
+  };
+
+  const handleDeleteProject = (projectId) => {
+    setProjects((current) => current.filter((project) => project.id !== projectId));
+    if (editingProjectId === projectId) {
+      setProjectDraft(makeEmptyProject());
+      setEditingProjectId(null);
+    }
+    setFormMessage('Project deleted.');
+  };
+
+  const handleExperienceSave = (event) => {
+    event.preventDefault();
+    const normalized = {
+      ...experienceDraft,
+      id: Number(experienceDraft.id) || Date.now(),
+      description: String(experienceDraft.description || '')
+        .split('\n')
+        .map((item) => item.trim())
+        .filter(Boolean)
+    };
+
+    if (!normalized.role.trim() || !normalized.company.trim()) {
+      setFormMessage('Experience role and company are required.');
+      return;
+    }
+
+    if (editingExperienceId) {
+      setExperience((current) => current.map((item) => item.id === editingExperienceId ? normalized : item));
+      setFormMessage('Experience updated.');
+    } else {
+      setExperience((current) => [normalized, ...current]);
+      setFormMessage('Experience added.');
+    }
+
+    setExperienceDraft(makeEmptyExperience());
+    setEditingExperienceId(null);
+  };
+
+  const handleDeleteExperience = (id) => {
+    setExperience((current) => current.filter((item) => item.id !== id));
+    if (editingExperienceId === id) {
+      setExperienceDraft(makeEmptyExperience());
+      setEditingExperienceId(null);
+    }
+    setFormMessage('Experience deleted.');
+  };
+
+  const handleEducationSave = (event) => {
+    event.preventDefault();
+    const normalized = {
+      ...educationDraft,
+      id: Number(educationDraft.id) || Date.now()
+    };
+
+    if (!normalized.degree.trim() || !normalized.school.trim()) {
+      setFormMessage('Degree and school are required.');
+      return;
+    }
+
+    if (editingEducationId) {
+      setEducation((current) => current.map((item) => item.id === editingEducationId ? normalized : item));
+      setFormMessage('Education updated.');
+    } else {
+      setEducation((current) => [normalized, ...current]);
+      setFormMessage('Education added.');
+    }
+
+    setEducationDraft(makeEmptyEducation());
+    setEditingEducationId(null);
+  };
+
+  const handleDeleteEducation = (id) => {
+    setEducation((current) => current.filter((item) => item.id !== id));
+    if (editingEducationId === id) {
+      setEducationDraft(makeEmptyEducation());
+      setEditingEducationId(null);
+    }
+    setFormMessage('Education deleted.');
+  };
+
+  const handleSkillSave = (event) => {
+    event.preventDefault();
+    const normalized = {
+      ...skillDraft,
+      items: Array.isArray(skillDraft.items)
+        ? skillDraft.items
+        : String(skillDraft.items || '')
+            .split(',')
+            .map((item) => item.trim())
+            .filter(Boolean)
+    };
+
+    if (!normalized.category.trim()) {
+      setFormMessage('Skill category is required.');
+      return;
+    }
+
+    if (editingSkillCategory) {
+      setSkills((current) => current.map((item) => item.category === editingSkillCategory ? normalized : item));
+      setFormMessage('Skill group updated.');
+    } else {
+      setSkills((current) => [normalized, ...current]);
+      setFormMessage('Skill group added.');
+    }
+
+    setSkillDraft(makeEmptySkillGroup());
+    setEditingSkillCategory(null);
+  };
+
+  const handleDeleteSkill = (category) => {
+    setSkills((current) => current.filter((item) => item.category !== category));
+    if (editingSkillCategory === category) {
+      setSkillDraft(makeEmptySkillGroup());
+      setEditingSkillCategory(null);
+    }
+    setFormMessage('Skill group deleted.');
+  };
+
+  return (
+    <div className="fixed inset-0 z-[70] flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-sm">
+      <div className="w-full max-w-6xl max-h-[90vh] overflow-y-auto rounded-3xl border border-slate-200 bg-white p-6 shadow-2xl dark:border-slate-700 dark:bg-slate-900">
+        <div className="mb-6 flex items-center justify-between gap-4">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary-500">Admin Panel</p>
+            <h3 className="text-3xl font-bold text-slate-900 dark:text-white">Portfolio management</h3>
+          </div>
+          <button type="button" onClick={onClose} className="rounded-full bg-slate-100 p-2 text-slate-700 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-200">
+            <X size={20} />
+          </button>
+        </div>
+
+        {!isUnlocked ? (
+          <div className="mx-auto max-w-md rounded-2xl border border-slate-200 bg-slate-50 p-6 dark:border-slate-700 dark:bg-slate-800/60">
+            <div className="mb-4 flex items-center gap-3 text-slate-900 dark:text-white">
+              <Lock size={20} className="text-primary-500" />
+              <h4 className="text-xl font-semibold">Login</h4>
+            </div>
+            <label className="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-200">Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              placeholder="Enter admin password"
+              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-800 outline-none ring-0 transition focus:border-primary-500 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100"
+            />
+            <button
+              type="button"
+              onClick={handleLogin}
+              className="mt-4 w-full rounded-xl bg-primary-600 px-4 py-3 font-semibold text-white transition hover:bg-primary-700"
+            >
+              Unlock Admin
+            </button>
+            {formMessage && <p className="mt-4 text-sm text-amber-600 dark:text-amber-400">{formMessage}</p>}
+          </div>
+        ) : (
+          <div className="space-y-8">
+            <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+              <form onSubmit={handlePersonalSave} className="rounded-2xl border border-slate-200 bg-slate-50 p-5 dark:border-slate-700 dark:bg-slate-800/60">
+                <div className="mb-5 flex items-center gap-2 text-slate-900 dark:text-white">
+                  <Pencil size={18} className="text-primary-500" />
+                  <h4 className="text-xl font-semibold">Personal information</h4>
+                </div>
+
+                <div className="space-y-4">
+                  <div>
+                    <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200">Name</label>
+                    <input value={personalForm.name || ''} onChange={(event) => setPersonalForm({ ...personalForm, name: event.target.value })} className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-800 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200">Title</label>
+                    <input value={personalForm.title || ''} onChange={(event) => setPersonalForm({ ...personalForm, title: event.target.value })} className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-800 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200">French Title</label>
+                    <input value={personalForm.titleFr || ''} onChange={(event) => setPersonalForm({ ...personalForm, titleFr: event.target.value })} className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-800 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200">Tagline</label>
+                    <input value={personalForm.tagline || ''} onChange={(event) => setPersonalForm({ ...personalForm, tagline: event.target.value })} className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-800 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200">Email</label>
+                    <input value={personalForm.email || ''} onChange={(event) => setPersonalForm({ ...personalForm, email: event.target.value })} className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-800 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200">Phone</label>
+                    <input value={personalForm.phone || ''} onChange={(event) => setPersonalForm({ ...personalForm, phone: event.target.value })} className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-800 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200">Location</label>
+                    <input value={personalForm.location || ''} onChange={(event) => setPersonalForm({ ...personalForm, location: event.target.value })} className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-800 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200">Website</label>
+                    <input value={personalForm.website || ''} onChange={(event) => setPersonalForm({ ...personalForm, website: event.target.value })} className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-800 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200">GitHub</label>
+                    <input value={personalForm.github || ''} onChange={(event) => setPersonalForm({ ...personalForm, github: event.target.value })} className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-800 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200">LinkedIn</label>
+                    <input value={personalForm.linkedin || ''} onChange={(event) => setPersonalForm({ ...personalForm, linkedin: event.target.value })} className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-800 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200">About</label>
+                    <textarea rows="4" value={personalForm.about || ''} onChange={(event) => setPersonalForm({ ...personalForm, about: event.target.value })} className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-800 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200">About (FR)</label>
+                    <textarea rows="4" value={personalForm.aboutFr || ''} onChange={(event) => setPersonalForm({ ...personalForm, aboutFr: event.target.value })} className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-800 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" />
+                  </div>
+                </div>
+
+                <button type="submit" className="mt-5 inline-flex items-center gap-2 rounded-xl bg-slate-900 px-4 py-3 font-semibold text-white transition hover:bg-slate-700 dark:bg-white dark:text-slate-900">
+                  <Save size={18} /> Save profile
+                </button>
+              </form>
+
+              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 dark:border-slate-700 dark:bg-slate-800/60">
+                <div className="mb-5 flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-2 text-slate-900 dark:text-white">
+                    <Plus size={18} className="text-primary-500" />
+                    <h4 className="text-xl font-semibold">Projects</h4>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setProjectDraft(makeEmptyProject());
+                      setEditingProjectId(null);
+                    }}
+                    className="rounded-lg border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 dark:border-slate-600 dark:text-slate-200"
+                  >
+                    New project
+                  </button>
+                </div>
+
+                <form onSubmit={handleProjectSave} className="space-y-4">
+                  <div>
+                    <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200">Title</label>
+                    <input value={projectDraft.title || ''} onChange={(event) => setProjectDraft({ ...projectDraft, title: event.target.value })} className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-800 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200">Category</label>
+                    <input value={projectDraft.category || ''} onChange={(event) => setProjectDraft({ ...projectDraft, category: event.target.value })} className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-800 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200">Status</label>
+                    <select value={projectDraft.status || 'In Progress'} onChange={(event) => setProjectDraft({ ...projectDraft, status: event.target.value })} className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-800 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100">
+                      <option>Completed</option>
+                      <option>In Progress</option>
+                      <option>Deployed</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200">Description</label>
+                    <textarea rows="3" value={projectDraft.description || ''} onChange={(event) => setProjectDraft({ ...projectDraft, description: event.target.value })} className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-800 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200">Tech stack (comma separated)</label>
+                    <input value={(projectDraft.tech || []).join(', ')} onChange={(event) => setProjectDraft({ ...projectDraft, tech: event.target.value.split(',').map((item) => item.trim()).filter(Boolean) })} className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-800 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200">Project link</label>
+                    <input value={projectDraft.link || ''} onChange={(event) => setProjectDraft({ ...projectDraft, link: event.target.value })} className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-800 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200">Image URL</label>
+                    <input value={projectDraft.image || ''} onChange={(event) => setProjectDraft({ ...projectDraft, image: event.target.value })} className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-800 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200">Screenshots (comma separated URLs)</label>
+                    <input value={(projectDraft.screenshots || []).join(', ')} onChange={(event) => setProjectDraft({ ...projectDraft, screenshots: event.target.value.split(',').map((item) => item.trim()).filter(Boolean) })} className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-800 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" />
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <button type="submit" className="inline-flex items-center gap-2 rounded-xl bg-primary-600 px-4 py-3 font-semibold text-white transition hover:bg-primary-700">
+                      <Save size={18} /> {editingProjectId ? 'Update project' : 'Add project'}
+                    </button>
+                    {editingProjectId && (
+                      <button type="button" onClick={() => { setProjectDraft(makeEmptyProject()); setEditingProjectId(null); }} className="rounded-xl border border-slate-300 px-4 py-3 font-medium text-slate-700 dark:border-slate-600 dark:text-slate-200">
+                        Cancel
+                      </button>
+                    )}
+                  </div>
+                </form>
+
+                <div className="mt-6 space-y-3">
+                  {projects.length === 0 ? (
+                    <p className="text-sm text-slate-500 dark:text-slate-400">No projects yet.</p>
+                  ) : (
+                    projects.map((project) => (
+                      <div key={project.id} className="flex items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-700 dark:bg-slate-900">
+                        <div>
+                          <p className="font-semibold text-slate-900 dark:text-white">{project.title}</p>
+                          <p className="text-xs text-slate-500 dark:text-slate-400">{project.category}</p>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <button type="button" onClick={() => handleEditProject(project)} className="rounded-lg bg-slate-100 p-2 text-slate-700 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-200">
+                            <Pencil size={16} />
+                          </button>
+                          <button type="button" onClick={() => handleDeleteProject(project.id)} className="rounded-lg bg-red-100 p-2 text-red-600 hover:bg-red-200 dark:bg-red-950/30 dark:text-red-300">
+                            <Trash2 size={16} />
+                          </button>
+                        </div>
+                      </div>
+                    ))
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <div className="grid gap-8 lg:grid-cols-2">
+              <form onSubmit={handleExperienceSave} className="rounded-2xl border border-slate-200 bg-slate-50 p-5 dark:border-slate-700 dark:bg-slate-800/60">
+                <div className="mb-5 flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-2 text-slate-900 dark:text-white">
+                    <Briefcase size={18} className="text-primary-500" />
+                    <h4 className="text-xl font-semibold">Experience</h4>
+                  </div>
+                  <button type="button" onClick={() => { setExperienceDraft(makeEmptyExperience()); setEditingExperienceId(null); }} className="rounded-lg border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 dark:border-slate-600 dark:text-slate-200">New entry</button>
+                </div>
+
+                <div className="space-y-4">
+                  <div>
+                    <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200">Role</label>
+                    <input value={experienceDraft.role || ''} onChange={(event) => setExperienceDraft({ ...experienceDraft, role: event.target.value })} className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-800 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200">Company</label>
+                    <input value={experienceDraft.company || ''} onChange={(event) => setExperienceDraft({ ...experienceDraft, company: event.target.value })} className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-800 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200">Date</label>
+                    <input value={experienceDraft.date || ''} onChange={(event) => setExperienceDraft({ ...experienceDraft, date: event.target.value })} className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-800 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200">Location</label>
+                    <input value={experienceDraft.location || ''} onChange={(event) => setExperienceDraft({ ...experienceDraft, location: event.target.value })} className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-800 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200">Description (one item per line)</label>
+                    <textarea rows="5" value={(experienceDraft.description || []).join('\n')} onChange={(event) => setExperienceDraft({ ...experienceDraft, description: event.target.value.split('\n').map((item) => item.trim()).filter(Boolean) })} className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-800 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" />
+                  </div>
+                </div>
+
+                <div className="mt-5 flex items-center gap-3">
+                  <button type="submit" className="inline-flex items-center gap-2 rounded-xl bg-primary-600 px-4 py-3 font-semibold text-white transition hover:bg-primary-700">
+                    <Save size={18} /> {editingExperienceId ? 'Update experience' : 'Add experience'}
+                  </button>
+                  {editingExperienceId && <button type="button" onClick={() => { setExperienceDraft(makeEmptyExperience()); setEditingExperienceId(null); }} className="rounded-xl border border-slate-300 px-4 py-3 font-medium text-slate-700 dark:border-slate-600 dark:text-slate-200">Cancel</button>}
+                </div>
+              </form>
+
+              <form onSubmit={handleEducationSave} className="rounded-2xl border border-slate-200 bg-slate-50 p-5 dark:border-slate-700 dark:bg-slate-800/60">
+                <div className="mb-5 flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-2 text-slate-900 dark:text-white">
+                    <GraduationCap size={18} className="text-primary-500" />
+                    <h4 className="text-xl font-semibold">Education</h4>
+                  </div>
+                  <button type="button" onClick={() => { setEducationDraft(makeEmptyEducation()); setEditingEducationId(null); }} className="rounded-lg border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 dark:border-slate-600 dark:text-slate-200">New entry</button>
+                </div>
+
+                <div className="space-y-4">
+                  <div>
+                    <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200">Degree</label>
+                    <input value={educationDraft.degree || ''} onChange={(event) => setEducationDraft({ ...educationDraft, degree: event.target.value })} className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-800 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200">School</label>
+                    <input value={educationDraft.school || ''} onChange={(event) => setEducationDraft({ ...educationDraft, school: event.target.value })} className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-800 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200">Date</label>
+                    <input value={educationDraft.date || ''} onChange={(event) => setEducationDraft({ ...educationDraft, date: event.target.value })} className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-800 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" />
+                  </div>
+                </div>
+
+                <div className="mt-5 flex items-center gap-3">
+                  <button type="submit" className="inline-flex items-center gap-2 rounded-xl bg-primary-600 px-4 py-3 font-semibold text-white transition hover:bg-primary-700">
+                    <Save size={18} /> {editingEducationId ? 'Update education' : 'Add education'}
+                  </button>
+                  {editingEducationId && <button type="button" onClick={() => { setEducationDraft(makeEmptyEducation()); setEditingEducationId(null); }} className="rounded-xl border border-slate-300 px-4 py-3 font-medium text-slate-700 dark:border-slate-600 dark:text-slate-200">Cancel</button>}
+                </div>
+              </form>
+            </div>
+
+            <form onSubmit={handleSkillSave} className="rounded-2xl border border-slate-200 bg-slate-50 p-5 dark:border-slate-700 dark:bg-slate-800/60">
+              <div className="mb-5 flex items-center justify-between gap-3">
+                <div className="flex items-center gap-2 text-slate-900 dark:text-white">
+                  <Code2 size={18} className="text-primary-500" />
+                  <h4 className="text-xl font-semibold">Skills</h4>
+                </div>
+                <button type="button" onClick={() => { setSkillDraft(makeEmptySkillGroup()); setEditingSkillCategory(null); }} className="rounded-lg border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 dark:border-slate-600 dark:text-slate-200">New group</button>
+              </div>
+
+              <div className="grid gap-4 md:grid-cols-2">
+                <div>
+                  <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200">Category</label>
+                  <input value={skillDraft.category || ''} onChange={(event) => setSkillDraft({ ...skillDraft, category: event.target.value })} className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-800 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" />
+                </div>
+                <div>
+                  <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-200">Skills (comma separated)</label>
+                  <input value={(skillDraft.items || []).join(', ')} onChange={(event) => setSkillDraft({ ...skillDraft, items: event.target.value.split(',').map((item) => item.trim()).filter(Boolean) })} className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-800 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" />
+                </div>
+              </div>
+
+              <div className="mt-5 flex items-center gap-3">
+                <button type="submit" className="inline-flex items-center gap-2 rounded-xl bg-primary-600 px-4 py-3 font-semibold text-white transition hover:bg-primary-700">
+                  <Save size={18} /> {editingSkillCategory ? 'Update skill group' : 'Add skill group'}
+                </button>
+                {editingSkillCategory && <button type="button" onClick={() => { setSkillDraft(makeEmptySkillGroup()); setEditingSkillCategory(null); }} className="rounded-xl border border-slate-300 px-4 py-3 font-medium text-slate-700 dark:border-slate-600 dark:text-slate-200">Cancel</button>}
+              </div>
+            </form>
+
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 dark:border-slate-700 dark:bg-slate-800/60">
+              <h4 className="mb-4 text-lg font-semibold text-slate-900 dark:text-white">Current list</h4>
+              <div className="space-y-3">
+                {skills.map((group) => (
+                  <div key={group.category} className="flex flex-col gap-2 rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-700 dark:bg-slate-900 md:flex-row md:items-center md:justify-between">
+                    <div>
+                      <p className="font-semibold text-slate-900 dark:text-white">{group.category}</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400">{group.items.join(', ')}</p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <button type="button" onClick={() => { setSkillDraft({ ...group, items: group.items || [] }); setEditingSkillCategory(group.category); }} className="rounded-lg bg-slate-100 p-2 text-slate-700 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-200"><Pencil size={16} /></button>
+                      <button type="button" onClick={() => handleDeleteSkill(group.category)} className="rounded-lg bg-red-100 p-2 text-red-600 hover:bg-red-200 dark:bg-red-950/30 dark:text-red-300"><Trash2 size={16} /></button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2">
+              {experience.map((item) => (
+                <div key={item.id} className="rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-700 dark:bg-slate-900">
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <p className="font-semibold text-slate-900 dark:text-white">{item.role}</p>
+                      <p className="text-sm text-slate-500 dark:text-slate-400">{item.company}</p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <button type="button" onClick={() => { setExperienceDraft(item); setEditingExperienceId(item.id); }} className="rounded-lg bg-slate-100 p-2 text-slate-700 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-200"><Pencil size={16} /></button>
+                      <button type="button" onClick={() => handleDeleteExperience(item.id)} className="rounded-lg bg-red-100 p-2 text-red-600 hover:bg-red-200 dark:bg-red-950/30 dark:text-red-300"><Trash2 size={16} /></button>
+                    </div>
+                  </div>
+                  <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">{item.date} • {item.location}</p>
+                  <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-slate-600 dark:text-slate-300">
+                    {(item.description || []).map((desc, idx) => <li key={idx}>{desc}</li>)}
+                  </ul>
+                </div>
+              ))}
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2">
+              {education.map((item) => (
+                <div key={item.id} className="rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-700 dark:bg-slate-900">
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <p className="font-semibold text-slate-900 dark:text-white">{item.degree}</p>
+                      <p className="text-sm text-slate-500 dark:text-slate-400">{item.school}</p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <button type="button" onClick={() => { setEducationDraft(item); setEditingEducationId(item.id); }} className="rounded-lg bg-slate-100 p-2 text-slate-700 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-200"><Pencil size={16} /></button>
+                      <button type="button" onClick={() => handleDeleteEducation(item.id)} className="rounded-lg bg-red-100 p-2 text-red-600 hover:bg-red-200 dark:bg-red-950/30 dark:text-red-300"><Trash2 size={16} /></button>
+                    </div>
+                  </div>
+                  <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">{item.date}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {formMessage && !isUnlocked && (
+          <p className="mt-4 text-sm text-amber-600 dark:text-amber-400">{formMessage}</p>
+        )}
+      </div>
+    </div>
+  );
+};
+
+const Footer = ({ personalInfo }) => (
   <footer className="bg-white dark:bg-slate-950 py-8 border-t border-slate-200 dark:border-slate-800">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
       <p className="text-slate-500 dark:text-slate-400 text-sm">
@@ -706,8 +1340,74 @@ const Footer = () => (
 function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [locale, setLocale] = useState('en');
+  const [personalInfo, setPersonalInfo] = useState(() => {
+    if (typeof window === 'undefined') return defaultPersonalInfo;
+    try {
+      const saved = localStorage.getItem('portfolio-personal-info');
+      return saved ? JSON.parse(saved) : defaultPersonalInfo;
+    } catch {
+      return defaultPersonalInfo;
+    }
+  });
+  const [projects, setProjects] = useState(() => {
+    if (typeof window === 'undefined') return defaultProjects;
+    try {
+      const saved = localStorage.getItem('portfolio-projects');
+      return saved ? JSON.parse(saved) : defaultProjects;
+    } catch {
+      return defaultProjects;
+    }
+  });
+  const [experience, setExperience] = useState(() => {
+    if (typeof window === 'undefined') return defaultExperience;
+    try {
+      const saved = localStorage.getItem('portfolio-experience');
+      return saved ? JSON.parse(saved) : defaultExperience;
+    } catch {
+      return defaultExperience;
+    }
+  });
+  const [education, setEducation] = useState(() => {
+    if (typeof window === 'undefined') return defaultEducation;
+    try {
+      const saved = localStorage.getItem('portfolio-education');
+      return saved ? JSON.parse(saved) : defaultEducation;
+    } catch {
+      return defaultEducation;
+    }
+  });
+  const [skills, setSkills] = useState(() => {
+    if (typeof window === 'undefined') return defaultSkills;
+    try {
+      const saved = localStorage.getItem('portfolio-skills');
+      return saved ? JSON.parse(saved) : defaultSkills;
+    } catch {
+      return defaultSkills;
+    }
+  });
+  const [adminOpen, setAdminOpen] = useState(false);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
+
+  useEffect(() => {
+    localStorage.setItem('portfolio-personal-info', JSON.stringify(personalInfo));
+  }, [personalInfo]);
+
+  useEffect(() => {
+    localStorage.setItem('portfolio-projects', JSON.stringify(projects));
+  }, [projects]);
+
+  useEffect(() => {
+    localStorage.setItem('portfolio-experience', JSON.stringify(experience));
+  }, [experience]);
+
+  useEffect(() => {
+    localStorage.setItem('portfolio-education', JSON.stringify(education));
+  }, [education]);
+
+  useEffect(() => {
+    localStorage.setItem('portfolio-skills', JSON.stringify(skills));
+  }, [skills]);
 
   // Handle system dark mode preference on initial load
   useEffect(() => {
@@ -732,19 +1432,43 @@ function App() {
         style={{ scaleX }}
       />
       
-      <Navbar darkMode={darkMode} setDarkMode={setDarkMode} locale={locale} setLocale={setLocale} />
+      <Navbar
+        darkMode={darkMode}
+        setDarkMode={setDarkMode}
+        locale={locale}
+        setLocale={setLocale}
+        personalInfo={personalInfo}
+        onAdminClick={() => setAdminOpen(true)}
+      />
       
       <main>
-        <Hero locale={locale} />
-        <About locale={locale} />
-        <Experience locale={locale} />
-        <Skills locale={locale} />
-        <Projects locale={locale} />
-        <Education locale={locale} />
-        <Contact locale={locale} />
+        <Hero locale={locale} personalInfo={personalInfo} />
+        <About locale={locale} personalInfo={personalInfo} />
+        <Experience locale={locale} experience={experience} />
+        <Skills locale={locale} skills={skills} />
+        <Projects locale={locale} projects={projects} />
+        <Education locale={locale} education={education} />
+        <Contact locale={locale} personalInfo={personalInfo} />
       </main>
       
-      <Footer />
+      <Footer personalInfo={personalInfo} />
+
+      {adminOpen && (
+        <AdminPanel
+          personalInfo={personalInfo}
+          setPersonalInfo={setPersonalInfo}
+          projects={projects}
+          setProjects={setProjects}
+          experience={experience}
+          setExperience={setExperience}
+          education={education}
+          setEducation={setEducation}
+          skills={skills}
+          setSkills={setSkills}
+          onClose={() => setAdminOpen(false)}
+          darkMode={darkMode}
+        />
+      )}
     </div>
   );
 }
