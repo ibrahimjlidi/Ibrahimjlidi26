@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
+import { useTelegramVisitNotifier } from './useTelegramVisitNotifier';
 import { 
   Mail, Download, ChevronDown, 
   ExternalLink, Code2, Monitor, Database, User, 
@@ -1338,6 +1339,8 @@ const Footer = ({ personalInfo }) => (
 );
 
 function App() {
+  useTelegramVisitNotifier();
+
   const [darkMode, setDarkMode] = useState(false);
   const [locale, setLocale] = useState('en');
   const [personalInfo, setPersonalInfo] = useState(() => {
