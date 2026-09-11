@@ -38,31 +38,57 @@ export default async function handler(req, res) {
     });
   }
 
-  const forwarded = req.headers['x-forwarded-for'];
-  const ipRaw = Array.isArray(forwarded)
-    ? forwarded[0]
-    : typeof forwarded === 'string'
-      ? forwarded.split(',')[0].trim()
-      : req.socket?.remoteAddress || 'unknown';
+  const getFirstIp = () => {
+    const candidates = [
+      req.headers['x-forwarded-for'],
+      req.headers['x-real-ip'],
+      req.headers['cf-connecting-ip'],
+      req.headers['x-vercel-forwarded-for']
+    ];
 
-  let geo = {
-    country_name: 'unknown',
-    city: 'unknown',
-    region: 'unknown',
-    org: 'unknown',
-    timezone: 'unknown'
+    for (const candidate of candidates) {
+      const value = Array.isArray(candidate) ? candidate[0] : candidate;
+      if (typeof value === 'string') {
+        const first = value.split(',')[0].trim();
+        if (first && first !== 'unknown' && first !== '::1' && first !== '127.0.0.1') {
+          return first;
+        }
+      }
+    }
+
+    return req.socket?.remoteAddress || 'unknown';
   };
 
-  try {
-    const geoRes = await fetch(`https://ipapi.co/${ipRaw}/json/`, {
-      headers: { 'Accept': 'application/json' }
-    });
+  const ipRaw = getFirstIp();
 
-    if (geoRes.ok) {
-      geo = await geoRes.json();
+  const geoFromHeaders = {
+    country_name: req.headers['x-vercel-ip-country'] || 'unknown',
+    city: req.headers['x-vercel-ip-city'] || 'unknown',
+    region: req.headers['x-vercel-ip-country-region'] || 'unknown',
+    org: req.headers['x-vercel-ip-country'] ? 'Vercel edge' : 'unknown',
+    timezone: req.headers['x-vercel-ip-timezone'] || 'unknown'
+  };
+
+  let geo = { ...geoFromHeaders };
+
+  const shouldQueryIpApi = !['unknown', '::1', '127.0.0.1'].includes(ipRaw) && !ipRaw.startsWith('10.') && !ipRaw.startsWith('172.') && !ipRaw.startsWith('192.168.') && !ipRaw.startsWith('fc') && !ipRaw.startsWith('fd');
+
+  if (shouldQueryIpApi) {
+    try {
+      const geoRes = await fetch(`https://ipapi.co/${ipRaw}/json/`, {
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (geoRes.ok) {
+        const payload = await geoRes.json();
+        geo = {
+          ...geoFromHeaders,
+          ...payload
+        };
+      }
+    } catch (error) {
+      console.log('Geo lookup failed:', error.message);
     }
-  } catch (error) {
-    console.log('Geo lookup failed:', error.message);
   }
 
   const ua = userAgent || 'unknown';
