@@ -19,9 +19,20 @@ function setOwnerBlocked() {
   document.cookie = `${COOKIE_NAME}=1; Max-Age=31536000; Path=/; SameSite=Lax`;
 }
 
+function isProductionHost(hostname) {
+  if (!hostname) return false;
+  if (hostname === 'localhost' || hostname === '127.0.0.1') return false;
+  if (hostname.includes('git-') || hostname.includes('-preview') || hostname.includes('preview')) return false;
+
+  return hostname.endsWith('vercel.app');
+}
+
 export function useTelegramVisitNotifier() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
+
+    const hostname = window.location.hostname;
+    if (!isProductionHost(hostname)) return;
 
     const notifyVisit = async () => {
       if (isOwnerBlocked()) return;
