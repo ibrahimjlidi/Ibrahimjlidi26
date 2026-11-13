@@ -1259,6 +1259,8 @@ const Contact = ({ locale, personalInfo }) => {
 
 const STORAGE_KEY = 'portfolio_telegram_blocked_v1';
 const COOKIE_NAME = 'portfolio_owner_session';
+const PROJECTS_MIGRATION_KEY = 'portfolio-projects-backfill-v1';
+const RECENTLY_ADDED_PROJECT_IDS = new Set([17, 18, 19, 20]);
 
 const skillIconMap = {
   Code2,
@@ -2044,11 +2046,22 @@ function App() {
     try {
       const saved = localStorage.getItem('portfolio-projects');
       const parsed = saved ? JSON.parse(saved) : defaultProjects;
-      return Array.isArray(parsed)
-        ? parsed.map((project) => project.id === 12 && project.title === 'FuelStationERP Tunisia'
+      if (!Array.isArray(parsed)) return defaultProjects;
+
+      const needsBackfill = !localStorage.getItem(PROJECTS_MIGRATION_KEY);
+      const currentIds = new Set(parsed.map((project) => Number(project.id)));
+      const withBackfill = needsBackfill
+        ? [
+            ...parsed,
+            ...defaultProjects.filter((project) => (
+              RECENTLY_ADDED_PROJECT_IDS.has(project.id) && !currentIds.has(project.id)
+            ))
+          ]
+        : parsed;
+
+      return withBackfill.map((project) => project.id === 12 && project.title === 'FuelStationERP Tunisia'
           ? { ...project, title: 'FuelStation ERP v2.0' }
-          : project)
-        : defaultProjects;
+          : project);
     } catch {
       return defaultProjects;
     }
@@ -2092,6 +2105,10 @@ function App() {
   useEffect(() => {
     localStorage.setItem('portfolio-projects', JSON.stringify(projects));
   }, [projects]);
+
+  useEffect(() => {
+    localStorage.setItem(PROJECTS_MIGRATION_KEY, '1');
+  }, []);
 
   useEffect(() => {
     localStorage.setItem('portfolio-experience', JSON.stringify(experience));
