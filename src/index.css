@@ -36,6 +36,45 @@
     background-color: var(--bg-color);
     color: var(--text-color);
     transition: background-color 0.3s ease, color 0.3s ease;
+    background-image:
+      radial-gradient(ellipse at 12% 8%, rgba(199, 210, 254, 0.48), transparent 36%),
+      radial-gradient(ellipse at 88% 28%, rgba(224, 231, 255, 0.56), transparent 34%),
+      linear-gradient(145deg, #ffffff 0%, #f8fafc 58%, #f5f3ff 100%);
+    background-attachment: fixed;
+  }
+
+  .dark body {
+    background-color: #020617;
+    background-image:
+      radial-gradient(ellipse at 12% 8%, rgba(49, 46, 129, 0.34), transparent 36%),
+      radial-gradient(ellipse at 88% 28%, rgba(30, 41, 59, 0.55), transparent 34%),
+      linear-gradient(145deg, #020617 0%, #0f172a 58%, #11102a 100%);
+  }
+}
+
+@layer components {
+  .glass-card {
+    border: 1px solid rgba(226, 232, 240, 0.72);
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.78);
+    box-shadow: 0 10px 35px rgba(15, 23, 42, 0.045);
+    backdrop-filter: blur(16px);
+  }
+
+  .dark .glass-card {
+    border-color: rgba(71, 85, 105, 0.62);
+    background: rgba(15, 23, 42, 0.72);
+    box-shadow: 0 12px 36px rgba(2, 6, 23, 0.18);
+  }
+
+  .section-space {
+    padding-block: 5rem;
+  }
+}
+
+@media (min-width: 640px) {
+  .section-space {
+    padding-block: 6rem;
   }
 }
 

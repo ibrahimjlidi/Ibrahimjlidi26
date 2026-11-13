@@ -1,13 +1,13 @@
-import { Code2, Server, Database, Wrench, GraduationCap, Briefcase, Mail, MapPin, Phone, Globe } from "lucide-react";
+import { Code2, Server, Database, Wrench } from "lucide-react";
 
 export const personalInfo = {
   name: "Ibrahim Jlidi",
-  title: "AI & Full Stack Developer",
-  titleFr: "Développeur Full Stack & IA",
+  title: "Full-Stack & AI DevOps Engineer",
+  titleFr: "Ingénieur Full-Stack & DevOps IA",
   tagline: "AI-driven web apps, E-commerce & Feature Teams Specialist",
   email: "ibrahimjlidi23@gmail.com",
   phone: "+216 23 84 46 41",
-  location: "Medenine / Remote",
+  location: "Tunis / Remote",
   website: "https://ibrahimjlidi-portfolio.netlify.app",
   github: "https://github.com/ibrahimjlidi",
   linkedin: "https://linkedin.com/in/ibrahimjlidi",
@@ -15,40 +15,46 @@ export const personalInfo = {
   aboutFr: "Développeur Full Stack & IA (Adobe Commerce / Magento) avec expérience dans la création d'applications web pilotées par l'IA, les audits de vulnérabilités web, et la contribution à des plateformes e-commerce internationales. Spécialisé en architecture frontend Hyvä, optimisation des performances et conception de composants évolutifs avec PHP, Alpine.js et Tailwind CSS. Expérience des intégrations LLM et du prompt engineering. À l'aise dans les environnements agiles pour livrer des solutions maintenables et orientées métier."
 };
 
+/**
+ * @typedef {{ category: string, icon: import('lucide-react').LucideIcon, items: string[] }} SkillGroup
+ * @typedef {{ id: number, role: string, company: string, date: string, location: string, description: string[] }} ExperienceEntry
+ * @typedef {{
+ *   id: string,
+ *   title: string,
+ *   projectUrl: string,
+ *   image?: string,
+ *   stack: string[],
+ *   architecture: { en: string, fr: string },
+ *   performance: { en: string, fr: string },
+ *   deployment: { en: string, fr: string }
+ * }} ArchitectureHighlight
+ */
+
+/** @type {SkillGroup[]} */
 export const skills = [
   {
-    category: "Frontend",
+    category: "Front-End",
     icon: Code2,
-    items: ["React.js", "Angular", "Tailwind CSS", "Alpine.js", "HTML5", "CSS3", "JavaScript"]
+    items: ["React", "Next.js", "Angular", "Tailwind CSS", "TypeScript", "Alpine.js", "Hyvä"]
   },
   {
-    category: "Backend",
+    category: "Back-End",
     icon: Server,
-    items: ["PHP (Magento 2)", "Node.js", "Express.js", "NestJS"]
-  },
-  {
-    category: "E-commerce & CMS",
-    icon: Globe,
-    items: ["Magento 2 (Adobe Commerce)", "Hyvä Theme", "Algolia"]
+    items: ["Node.js", "Express.js", "NestJS", "Laravel", "Symfony", "PHP / Magento 2"]
   },
   {
     category: "Databases",
     icon: Database,
-    items: ["MongoDB", "MySQL", "PostgreSQL"]
+    items: ["PostgreSQL", "MongoDB", "MySQL"]
   },
   {
-    category: "Tools & Workflow",
+    category: "DevOps & AI",
     icon: Wrench,
-    items: ["Git", "GitHub", "GitLab", "Docker", "Postman", "Jira", "Agile/Scrum", "Feature Team collaboration"]
-  }
-  ,
-  {
-    category: "AI & Security",
-    icon: Wrench,
-    items: ["LLMs (GPT)", "Prompt Engineering", "AI Integration", "Web Vulnerability Auditing", "Security Best Practices"]
+    items: ["Docker", "Kubernetes", "GitLab CI/CD", "Linux / VPS", "Git", "AI workflows", "LLM integration"]
   }
 ];
 
+/** @type {ExperienceEntry[]} */
 export const experience = [
   {
     id: 1,
@@ -106,6 +112,65 @@ export const experience = [
   }
 ];
 
+/** @type {ArchitectureHighlight[]} */
+export const architectureHighlights = [
+  {
+    id: "fuelstation-erp",
+    title: "FuelStation ERP v2.0",
+    projectUrl: "https://kiosk-tunisia.vercel.app/",
+    stack: ["React", "Node.js", "Express", "MongoDB"],
+    architecture: {
+      en: "MERN application bringing station, pump, product, purchase, and expense operations together with role-based access.",
+      fr: "Application MERN réunissant la gestion des stations, pompes, produits, achats et dépenses avec un accès par rôle."
+    },
+    performance: {
+      en: "Five operational areas are managed in one interface, with permissions tailored to staff roles.",
+      fr: "Cinq domaines opérationnels sont réunis dans une interface, avec des permissions adaptées aux rôles."
+    },
+    deployment: {
+      en: "Live application deployed on Vercel.",
+      fr: "Application en ligne déployée sur Vercel."
+    }
+  },
+  {
+    id: "elite-auto",
+    title: "Elite-Auto E-Commerce",
+    projectUrl: "https://www.elite-auto.fr/",
+    stack: ["Angular", "NestJS"],
+    architecture: {
+      en: "Contributed to an international e-commerce platform using Angular and NestJS within a feature team.",
+      fr: "Contribution à une plateforme e-commerce internationale avec Angular et NestJS au sein d'une feature team."
+    },
+    performance: {
+      en: "Participated in performance optimization and debugging.",
+      fr: "Participation à l'optimisation des performances et au débogage."
+    },
+    deployment: {
+      en: "Delivered collaboratively with backend, design, and stakeholder teams.",
+      fr: "Livraison en collaboration avec les équipes backend, design et les parties prenantes."
+    }
+  },
+  {
+    id: "atol-hyva",
+    title: "Atol.fr Magento 2 / Hyvä",
+    projectUrl: "https://www.atol.fr/",
+    image: "/screenshots/atol.JPG",
+    stack: ["Magento 2", "Hyvä", "Alpine.js", "Tailwind CSS"],
+    architecture: {
+      en: "Built reusable, CMS-driven components for a Magento 2 storefront using Hyvä, Alpine.js, and Tailwind CSS.",
+      fr: "Création de composants réutilisables pilotés par le CMS pour une boutique Magento 2 avec Hyvä, Alpine.js et Tailwind CSS."
+    },
+    performance: {
+      en: "Contributed to storefront performance optimization and debugging.",
+      fr: "Contribution à l'optimisation des performances et au débogage de la boutique."
+    },
+    deployment: {
+      en: "Shipped reusable storefront features as part of an international feature team.",
+      fr: "Livraison de fonctionnalités réutilisables au sein d'une feature team internationale."
+    }
+  }
+];
+
 export const education = [
   {
     id: 1,
@@ -121,6 +186,7 @@ export const education = [
   }
 ];
 
+/** @type {PortfolioProject[]} */
 export const projects = [
   {
     id: 1,
@@ -245,14 +311,14 @@ export const projects = [
   },
   {
     id: 12,
-    title: "FuelStationERP Tunisia",
+    title: "FuelStation ERP v2.0",
     category: "Full Stack",
     description: "A completed MERN stack fuel station ERP for Tunisia, featuring station management, pumps, products, purchases, expenses, and role-based access control.",
     tech: ["MongoDB", "Express.js", "React", "Node.js", "Tailwind CSS"],
     status: "Completed",
-    link: "http://kisok-tunisia.duckdns.org/",
-    image: "/screenshots/capt4.JPG",
-    screenshots: ["/screenshots/capt1.JPG", "/screenshots/capt2.JPG", "/screenshots/capt3.JPG", "/screenshots/capt4.JPG"]
+    link: "https://kiosk-tunisia.vercel.app/",
+    image: "/screenshots/kiosk1.PNG",
+    screenshots: ["/screenshots/kiosk1.PNG", "/screenshots/kiosk2.PNG", "/screenshots/kiosk3.PNG", "/screenshots/kiosk4.PNG"]
   }
   ,
    {
@@ -299,8 +365,153 @@ export const projects = [
     link: "https://rag-five-alpha.vercel.app/",
     image: "/screenshots/rag.JPG",
     screenshots: ["/screenshots/rag.JPG", "/screenshots/rag2.JPG"]
+  },
+  {
+    id: 17,
+    title: "MobiTech Maghreb",
+    category: "E-commerce",
+    description: "An online store for new smartphones from Apple, Samsung, Xiaomi, and other brands, with delivery across the Maghreb and warranty support.",
+    tech: ["E-commerce", "Smartphones", "Product Catalog"],
+    status: "Completed",
+    link: "https://mobiphone-flame.vercel.app/",
+    image: "/screenshots/mobi1.PNG",
+    screenshots: ["/screenshots/mobi1.PNG", "/screenshots/mobi2.PNG", "/screenshots/mobi3.PNG", "/screenshots/mobi4.PNG"]
+  },
+  {
+    id: 18,
+    title: "Hifz Quran App",
+    category: "Education",
+    description: "An Arabic-language Quran app with a focused interface for reading and memorization practice.",
+    tech: ["Quran", "Arabic", "Memorization"],
+    status: "Completed",
+    link: "https://hifz-app-rho.vercel.app/",
+    image: "/screenshots/coran1.PNG",
+    screenshots: ["/screenshots/coran1.PNG", "/screenshots/coran2.PNG", "/screenshots/coran3.PNG", "/screenshots/coran4.PNG"]
+  },
+  {
+    id: 19,
+    title: "DeutschQuest",
+    category: "Education",
+    description: "A German vocabulary learning experience for building and practicing language skills.",
+    tech: ["German", "Vocabulary", "Language Learning"],
+    status: "Completed",
+    link: "https://deutschquest-ten.vercel.app/",
+    image: "/screenshots/german.PNG",
+    screenshots: ["/screenshots/german.PNG", "/screenshots/german1.PNG", "/screenshots/german2.PNG", "/screenshots/german3.PNG"]
+  },
+  {
+    id: 20,
+    title: "NovaStore",
+    category: "E-commerce",
+    description: "An Arabic and French inventory and sales management app for retail stores.",
+    tech: ["Inventory Management", "Sales", "Arabic", "French"],
+    status: "Completed",
+    link: "https://novastore-black.vercel.app/",
+    image: "/screenshots/nova1.PNG",
+    screenshots: ["/screenshots/nova1.PNG", "/screenshots/nova2.PNG", "/screenshots/nova3.PNG", "/screenshots/nova4.PNG", "/screenshots/nova5.PNG", "/screenshots/nova6.PNG"]
   }
 ];
+
+/**
+ * @typedef {{
+ *   id: number,
+ *   title: string,
+ *   category: string,
+ *   description?: string,
+ *   tech?: string[] | string,
+ *   image?: string,
+ *   screenshots?: string[],
+ *   link?: string,
+ *   repoUrl?: string | null,
+ *   status?: string
+ * }} PortfolioProject
+ * @typedef {{ value: string, label: string }} ProjectMetric
+ * @typedef {{ challenge: string, system: string, outcomes: string }} ProjectArchitectureNotes
+ * @typedef {{
+ *   id: number,
+ *   title: string,
+ *   category: 'ERP' | 'E-Commerce' | 'AI & Analytics' | 'Other',
+ *   featured: boolean,
+ *   summary: string,
+ *   metrics: ProjectMetric[],
+ *   techStack: string[],
+ *   image: string,
+ *   liveUrl: string | null,
+ *   repoUrl: string | null,
+ *   architectureNotes: ProjectArchitectureNotes,
+ *   screenshots: string[],
+ *   status: string
+ * }} ProjectShowcaseEntry
+ */
+
+const showcaseCategories = {
+  "E-commerce": "E-Commerce",
+  Magento: "E-Commerce",
+  "AI / Web": "AI & Analytics",
+  "AI / Security": "AI & Analytics",
+  "AI / RAG": "AI & Analytics"
+};
+
+const showcaseMetadata = {
+  1: { category: "AI & Analytics" },
+  2: { category: "E-Commerce" },
+  7: { category: "AI & Analytics" },
+  9: { category: "AI & Analytics" },
+  12: {
+    category: "ERP",
+    featured: true,
+    metrics: [
+      { value: "05", label: "operations modules" },
+      { value: "MERN", label: "full-stack system" },
+      { value: "RBAC", label: "role-based access" }
+    ],
+    architectureNotes: {
+      challenge: "Fuel station operators need a central place to manage stations, pumps, products, purchases and expenses while controlling staff permissions.",
+      system: "MERN stack: React interface, Node.js and Express backend, and MongoDB data storage. The system includes role-based access control.",
+      outcomes: "Five operational areas—stations, pumps, products, purchases and expenses—are managed in one system, with access controlled by user role."
+    }
+  },
+  14: { category: "AI & Analytics" },
+  15: { category: "AI & Analytics" },
+  16: { category: "AI & Analytics" },
+  17: { category: "E-Commerce" },
+  20: { category: "E-Commerce" }
+};
+
+/**
+ * Convert the admin-friendly project records into the showcase view model.
+ * @param {PortfolioProject[]} sourceProjects
+ * @returns {ProjectShowcaseEntry[]}
+ */
+export const toProjectShowcase = (sourceProjects) => sourceProjects.map((project) => {
+  const metadata = showcaseMetadata[project.id] || {};
+  const techStack = Array.isArray(project.tech)
+    ? project.tech
+    : String(project.tech || "").split(",").map((item) => item.trim()).filter(Boolean);
+  const summary = project.description || "";
+
+  return {
+    id: project.id,
+    title: project.title,
+    category: metadata.category || showcaseCategories[project.category] || "Other",
+    featured: Boolean(metadata.featured),
+    summary,
+    metrics: metadata.metrics || [],
+    techStack: techStack.slice(0, 5),
+    image: project.image || project.screenshots?.[0] || "https://placehold.co/1200x800/0f172a/ffffff?text=Project+Preview",
+    liveUrl: project.link && project.link !== "#" ? project.link : null,
+    repoUrl: project.repoUrl || null,
+    architectureNotes: metadata.architectureNotes || {
+      challenge: `Project brief: ${summary}`,
+      system: techStack.length ? `Listed stack: ${techStack.join(", ")}.` : "Implementation details are not listed.",
+      outcomes: project.status === "Completed"
+        ? `Listed as completed. ${summary}`
+        : `Current status: ${project.status || "In progress"}. ${summary}`
+    },
+    screenshots: Array.isArray(project.screenshots) ? project.screenshots : [],
+    status: project.status || "In Progress"
+  };
+});
 
 export const languages = [
   { name: "Arabic", level: "Native" },
