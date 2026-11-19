@@ -2,17 +2,22 @@ import { Code2, Server, Database, Wrench } from "lucide-react";
 
 export const personalInfo = {
   name: "Ibrahim Jlidi",
-  title: "Full-Stack & AI DevOps Engineer",
-  titleFr: "Ingénieur Full-Stack & DevOps IA",
-  tagline: "AI-driven web apps, E-commerce & Feature Teams Specialist",
+  title: "Ingénieur Full Stack",
+  titleFr: "Ingénieur Full Stack",
+  tagline: "Développement web · Architecture logicielle · Intelligence artificielle",
   email: "ibrahimjlidi23@gmail.com",
-  phone: "+216 23 84 46 41",
-  location: "Tunis / Remote",
-  website: "https://ibrahimjlidi-portfolio.netlify.app",
+  phone: "+216 23 844 641",
+  location: "Tunisie | Remote",
+  website: "https://portfolio2026-six-vert.vercel.app",
   github: "https://github.com/ibrahimjlidi",
   linkedin: "https://linkedin.com/in/ibrahimjlidi",
-  about: "AI & Magento (Adobe Commerce) Full Stack Developer with experience building AI-driven web applications, performing web vulnerability audits, and contributing to international e-commerce platforms within feature teams. Specialized in Hyvä frontend architecture, performance optimization, and scalable component design using PHP, Alpine.js, and Tailwind CSS. Experienced with LLM integrations, prompt engineering, and AI-based automation. Also experienced in full-stack development using the MERN stack (MongoDB, Express, React, Node.js). Comfortable working in agile environments, delivering maintainable, business-oriented solutions.",
-  aboutFr: "Développeur Full Stack & IA (Adobe Commerce / Magento) avec expérience dans la création d'applications web pilotées par l'IA, les audits de vulnérabilités web, et la contribution à des plateformes e-commerce internationales. Spécialisé en architecture frontend Hyvä, optimisation des performances et conception de composants évolutifs avec PHP, Alpine.js et Tailwind CSS. Expérience des intégrations LLM et du prompt engineering. À l'aise dans les environnements agiles pour livrer des solutions maintenables et orientées métier."
+  about: "Experienced Full-Stack Engineer specializing in React.js, Angular, Node.js, NestJS and TypeScript. I develop frontend and backend applications, design REST APIs, evolve microservice architectures, optimize performance, mentor developers, and integrate AI solutions including AI agents.",
+  aboutFr: "Ingénieur Full Stack expérimenté dans la conception et le développement d’applications web, notamment pour des clients français. Spécialisé en React.js, Angular, Node.js, NestJS et TypeScript, j’interviens sur les développements frontend et backend, la conception d’API REST ainsi que l’évolution d’architectures microservices.",
+  achievements: [
+    "Reduced deployment time by 60% through CI/CD pipelines.",
+    "Improved API response times by 35% after migration to microservices.",
+    "Developed and integrated AI agents into existing web applications."
+  ]
 };
 
 /**
@@ -35,22 +40,22 @@ export const skills = [
   {
     category: "Front-End",
     icon: Code2,
-    items: ["React", "Next.js", "Angular", "Tailwind CSS", "TypeScript", "Alpine.js", "Hyvä"]
+    items: ["React.js", "Next.js", "Angular", "Tailwind CSS", "SCSS", "HTML5", "CSS3", "Alpine.js", "Hyvä Theme", "RxJS"]
   },
   {
-    category: "Back-End",
+    category: "Back-End & API",
     icon: Server,
-    items: ["Node.js", "Express.js", "NestJS", "Laravel", "Symfony", "PHP / Magento 2"]
+    items: ["Node.js", "NestJS", "Express.js", "PHP", "Symfony", "REST API"]
   },
   {
-    category: "Databases",
+    category: "Languages & Data",
     icon: Database,
-    items: ["PostgreSQL", "MongoDB", "MySQL"]
+    items: ["JavaScript (ES6+)", "TypeScript", "PHP", "C#", "SQL", "MongoDB", "PostgreSQL", "SQL Server"]
   },
   {
-    category: "DevOps & AI",
+    category: "Architecture, AI & DevOps",
     icon: Wrench,
-    items: ["Docker", "Kubernetes", "GitLab CI/CD", "Linux / VPS", "Git", "AI workflows", "LLM integration"]
+    items: ["Microservices", "Clean Architecture", "Design Patterns", "OpenAI API", "AI Agents", "Docker", "Git", "GitLab CI/CD", "Postman", "Jira", "Cursor", "GitHub Copilot", "Agile", "Scrum"]
   }
 ];
 
@@ -58,56 +63,41 @@ export const skills = [
 export const experience = [
   {
     id: 1,
-    role: "Web Developer",
-    company: "IoTechnologies",
-    date: "Sep 2022 – Present",
-    location: "Medenine / Remote",
+    role: "Ingénieur Full Stack",
+    company: "SARL STE FLOWTEK CONSULTING",
+    date: "Juil. 2025 – Nov. 2026",
+    location: "Tunisie · Sur site",
     description: [
-      "Contributed to Magento 2 (Adobe Commerce) projects as part of a feature team",
-      "Developed scalable UI components using Hyvä Theme, Tailwind CSS, and Alpine.js",
-      "Implemented AI-powered features and integrations (LLMs, prompt engineering) in client projects",
-      "Conducted web vulnerability audits and implemented remediations to improve security posture",
-      "Collaborated with backend developers, designers, and stakeholders",
-      "Integrated Algolia Search (Autocomplete + InstantSearch)",
-      "Built reusable CMS-driven components (widgets, sliders, banners)",
-      "Implemented a dynamic multi-level mega menu (mobile + desktop)",
-      "Participated in performance optimization and debugging",
-      "Worked on international platforms: Atol.fr (Magento) and Elite-Auto.fr (Angular + NestJS)"
+      "Conception et déploiement de solutions web full-stack et d'API RESTful sous TypeScript, Node.js, NestJS et PHP.",
+      "Conteneurisation des environnements de développement et des services avec Docker pour uniformiser les pipelines CI/CD.",
+      "Pilotage des optimisations de performance, du refactoring et des évolutions fonctionnelles pour Atol.fr et Elite-Auto.fr.",
+      "Collaboration étroite avec les chefs de produit et les équipes pluridisciplinaires pour traduire les besoins métiers et SaaS en composants modulaires."
     ]
   },
   {
     id: 2,
-    role: "Freelance Developer",
-    company: "Weecode",
-    date: "Nov 2023 – Present",
-    location: "Remote",
+    role: "Ingénieur Full Stack (MERN / Angular / PHP)",
+    company: "SOCIÉTÉ IOLABS TECHNOLOGIES",
+    date: "Sept. 2022 – Juin 2025",
+    location: "Médenine, Tunisie · Sur site",
     description: [
-      "Delivered full-stack web and mobile applications for clients",
-      "Collaborated with teams on feature implementation and optimization"
+      "Développement et maintenance d'applications web et microservices haute performance avec TypeScript, React, Angular, NestJS, Node.js et Magento 2 (Hyvä Theme).",
+      "Contribution majeure à Atol.fr et Elite-Auto.fr, plateformes e-commerce Magento et portail automobile Angular / NestJS.",
+      "Conception et sécurisation d'API RESTful connectées à PostgreSQL, MySQL et MongoDB.",
+      "Migration d'une architecture monolithique vers des microservices, avec +35 % de rapidité sur les API et maintien des pipelines CI/CD avec Docker et Git."
     ]
   },
   {
     id: 3,
-    role: "Instructor",
-    company: "Designet",
-    date: "Jan 2025 – Present",
-    location: "Remote",
+    role: "Développeur Full Stack",
+    company: "Innsyapp",
+    date: "Juin 2020 – Août 2022",
+    location: "Tunisie · Freelance",
     description: [
-      "Delivered MERN stack training (MongoDB, Express, React, Node.js)",
-      "Taught REST APIs, authentication, and scalable architecture",
-      "Mentored students on real-world full-stack projects"
-    ]
-  },
-  {
-    id: 4,
-    role: "Freelance Developer",
-    company: "Personal Projects",
-    date: "Jun 2020 – Aug 2022",
-    location: "Remote",
-    description: [
-      "Developed websites and business applications for local clients",
-      "Built responsive frontends and integrated backend APIs",
-      "Collaborated directly with clients for delivery and improvements"
+      "Développement de modules web en PHP, JavaScript et MySQL dans le cadre de projets clients.",
+      "Participation aux cycles Agile : sprints, réunions quotidiennes et rétrospectives.",
+      "Débogage et optimisation de modules existants avec une réduction annoncée moyenne de 25 % des temps de chargement.",
+      "Montée en compétences sur React.js et Node.js selon les besoins des projets."
     ]
   }
 ];
@@ -118,6 +108,7 @@ export const architectureHighlights = [
     id: "fuelstation-erp",
     title: "FuelStation ERP v2.0",
     projectUrl: "https://kiosk-tunisia.vercel.app/",
+    image: "/screenshots/kiosk1.PNG",
     stack: ["React", "Node.js", "Express", "MongoDB"],
     architecture: {
       en: "MERN application bringing station, pump, product, purchase, and expense operations together with role-based access.",
@@ -136,14 +127,15 @@ export const architectureHighlights = [
     id: "elite-auto",
     title: "Elite-Auto E-Commerce",
     projectUrl: "https://www.elite-auto.fr/",
-    stack: ["Angular", "NestJS"],
+    image: "/screenshots/elite-auto.png",
+    stack: ["Angular", "TypeScript", "RxJS", "NestJS", "SQL Server", "Docker"],
     architecture: {
       en: "Contributed to an international e-commerce platform using Angular and NestJS within a feature team.",
       fr: "Contribution à une plateforme e-commerce internationale avec Angular et NestJS au sein d'une feature team."
     },
     performance: {
-      en: "Participated in performance optimization and debugging.",
-      fr: "Participation à l'optimisation des performances et au débogage."
+      en: "Reduced loading time by 40% with lazy loading and SQL query optimization.",
+      fr: "Réduction de 40 % des temps de chargement grâce au lazy loading et à l’optimisation des requêtes SQL.",
     },
     deployment: {
       en: "Delivered collaboratively with backend, design, and stakeholder teams.",
@@ -168,21 +160,61 @@ export const architectureHighlights = [
       en: "Shipped reusable storefront features as part of an international feature team.",
       fr: "Livraison de fonctionnalités réutilisables au sein d'une feature team internationale."
     }
+  },
+  {
+    id: "edu-insight",
+    title: "EduInsight",
+    projectUrl: "https://eduinsightfrontend.vercel.app",
+    image: "/screenshots/edun.JPG",
+    stack: ["React.js", "Node.js", "MongoDB", "OpenAI API", "Tailwind CSS"],
+    architecture: {
+      en: "EdTech platform integrating OpenAI API for adaptive quiz generation, student progress analysis, and personalized recommendations.",
+      fr: "Plateforme EdTech intégrant l'API OpenAI pour générer des quiz adaptatifs, analyser la progression des étudiants et proposer des recommandations personnalisées."
+    },
+    performance: {
+      en: "AI-driven insights and adaptive learning paths enhance educational engagement and effectiveness.",
+      fr: "Les insights pilotés par l'IA et les parcours d'apprentissage adaptatifs améliorent l'engagement et l'efficacité éducative."
+    },
+    deployment: {
+      en: "Deployed on Vercel with a focus on performance and scalability.",
+      fr: "Déployé sur Vercel avec un accent sur la performance et la scalabilité."
+    }
+  },
+  {
+    id: "nova-store",
+    title: "NovaStore",
+    projectUrl: "https://novastore-black.vercel.app/",
+    image: "/screenshots/nova1.PNG",
+    stack: ["React.js", "Node.js", "Express.js", "MongoDB", "Tailwind CSS", "Docker"],
+    architecture: {
+      en: "Bilingual Arabic/French application for stock and sales management in retail, integrating products, purchases, sales, quantities, and a commercial dashboard.",
+      fr: "Application bilingue arabe/français de gestion de stock et des ventes pour les commerces de détail, intégrant les produits, achats, ventes, quantités disponibles et un tableau de bord commercial."
+    },
+    performance: {
+      en: "Optimized for fast interactions and real-time data updates in a retail environment.",
+      fr: "Optimisé pour des interactions rapides et des mises à jour de données en temps réel dans un environnement de vente au détail."
+    },
+    deployment: {
+      en: "Utilizes Docker for consistent development and production environments, deployed on Vercel.",
+      fr: "Utilise Docker pour des environnements de développement et de production cohérents, déployé sur Vercel."
+    }
   }
 ];
 
 export const education = [
   {
     id: 1,
-    degree: "Master’s in Software Engineering",
-    school: "ISIMED, Medenine",
-    date: "2019 – 2021"
+    degree: "Master en Génie logiciel & Ingénierie des connaissances (Bac+5)",
+    school: "ISIMED",
+    date: "2019 – 2021",
+    details: "Architecture logicielle avancée, Clean Architecture, IA. PFE : Jood, application mobile cross-platform (React Native, Node.js, Firebase)."
   },
   {
     id: 2,
-    degree: "Bachelor’s in Computer Science",
-    school: "ISIMED, Medenine",
-    date: "2015 – 2018"
+    degree: "Licence en Sciences de l’informatique (Bac+3)",
+    school: "ISIMED",
+    date: "2015 – 2018",
+    details: "Algorithmique, programmation orientée objet (Java, C++), bases de données. PFE : agent IA en Python pour le diagnostic automatique de pannes automobiles."
   }
 ];
 
@@ -324,11 +356,11 @@ export const projects = [
    {
     id: 13,
     title: "EduInsight",
-    category: "Full Stack",
-    description: "An educational platform focused on student learning, course management, and engaging digital experiences.",
-    tech: ["React", "Node.js", "MongoDB", "Tailwind CSS"],
-    status: "In Progress",
-    link: "https://edu-insight.vercel.app/",
+    category: "AI / Education",
+    description: "Plateforme EdTech intégrant l'API OpenAI pour générer des quiz adaptatifs, analyser la progression des étudiants et proposer des recommandations personnalisées.",
+    tech: ["React.js", "Node.js", "MongoDB", "OpenAI API", "Tailwind CSS"],
+    status: "Completed",
+    link: "https://eduinsightfrontend.vercel.app",
     image: "/screenshots/edun.JPG",
     screenshots: ["/screenshots/edun.JPG", "/screenshots/edun2.JPG", "/screenshots/edun3.JPG"]
   },
@@ -403,8 +435,8 @@ export const projects = [
     id: 20,
     title: "NovaStore",
     category: "E-commerce",
-    description: "An Arabic and French inventory and sales management app for retail stores.",
-    tech: ["Inventory Management", "Sales", "Arabic", "French"],
+    description: "Application bilingue arabe/français de gestion de stock et des ventes pour les commerces de détail, intégrant les produits, achats, ventes, quantités disponibles et un tableau de bord commercial.",
+    tech: ["React.js", "Node.js", "Express.js", "MongoDB", "Tailwind CSS", "Docker"],
     status: "Completed",
     link: "https://novastore-black.vercel.app/",
     image: "/screenshots/nova1.PNG",
@@ -514,8 +546,7 @@ export const toProjectShowcase = (sourceProjects) => sourceProjects.map((project
 });
 
 export const languages = [
-  { name: "Arabic", level: "Native" },
-  { name: "English", level: "Intermediate (B1/B2)" },
-  { name: "French", level: "Intermediate (B1/B2)" },
-  { name: "Italian", level: "Basic (A1/A2)" }
+  { name: "Arabic", level: "Langue maternelle" },
+  { name: "French", level: "Professionnel / Technique" },
+  { name: "English", level: "Professionnel / Technique" }
 ];

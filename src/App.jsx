@@ -47,9 +47,9 @@ const translations = {
     viewWork: 'View Work',
     downloadCV: 'Download CV',
     letsTalk: "Let's Talk",
-    heroTitle: 'Full-Stack & AI DevOps Engineer',
-    availability: 'Available for Senior Full-Stack & DevOps Opportunities',
-    heroSubtitle: 'Architecting scalable applications and automated CI/CD pipelines at production scale.',
+    heroTitle: 'Full-Stack Engineer',
+    availability: 'Open to Full-Stack opportunities',
+    heroSubtitle: 'Building high-performance web applications, REST APIs, microservices and AI integrations.',
     quickHighlights: 'Quick Highlights / Core Stack',
     engineeringAtScale: 'Engineering at Scale',
     yearsInProduction: 'Years in Production',
@@ -83,7 +83,24 @@ const translations = {
     roleIo: 'Senior Full-Stack Engineer',
     roleDesignet: 'MERN Stack Instructor & Technical Lead',
     roleWeecode: 'Freelance Full-Stack Developer',
-    experienceDescriptions: {},
+    experienceDescriptions: {
+      IoTechnologies: [
+        'Developed web applications, microservices, REST APIs, and Magento 2 e-commerce features.',
+        'Contributed to Atol.fr and Elite-Auto.fr with React, Angular, NestJS, and Magento.',
+        'Designed secure APIs connected to PostgreSQL, MySQL, and MongoDB.',
+        'Optimized performance and delivered features in Agile environments.'
+      ],
+      Designet: [
+        'Led online MERN ecosystem training programs.',
+        'Taught REST APIs, Redux, Context API, JWT/OAuth2, and application security.',
+        'Mentored learners on evolving full-stack architectures.'
+      ],
+      Weecode: [
+        'Architected and developed full-stack solutions for international clients.',
+        'Built React, Node.js, Express.js, TypeScript, and PostgreSQL applications.',
+        'Performed technical audits, database optimization, and performance troubleshooting.'
+      ]
+    },
     allProjects: 'ALL',
     erp: 'ERP',
     ecommerce: 'E-COMMERCE',
@@ -151,9 +168,9 @@ const translations = {
     viewWork: 'Voir mes projets',
     downloadCV: 'Télécharger CV',
     letsTalk: 'Contactez-moi',
-    heroTitle: 'Ingénieur Full-Stack & DevOps IA',
-    availability: 'Ouvert aux opportunités Senior Full-Stack & DevOps',
-    heroSubtitle: 'Je conçois des applications évolutives et des pipelines CI/CD automatisés pour la production.',
+    heroTitle: 'Ingénieur Full Stack',
+    availability: 'Ouvert aux opportunités Full Stack',
+    heroSubtitle: 'Je conçois des applications web performantes, des API REST, des microservices et des intégrations IA.',
     quickHighlights: 'En bref / Stack principale',
     engineeringAtScale: 'L’ingénierie à grande échelle',
     yearsInProduction: 'Années en production',
@@ -185,23 +202,24 @@ const translations = {
     deployment: 'Déploiement',
     viewProject: 'Voir le projet',
     roleIo: 'Ingénieur Full-Stack Senior',
-    roleDesignet: 'Formateur MERN & responsable technique',
+    roleDesignet: 'Instructeur & Référent Technique MERN',
     roleWeecode: 'Développeur Full-Stack freelance',
     experienceDescriptions: {
       IoTechnologies: [
-        'Contribution à des projets Magento 2 (Adobe Commerce) au sein d’une feature team.',
-        'Développement de composants réutilisables avec Hyvä, Tailwind CSS et Alpine.js.',
-        'Mise en œuvre de fonctionnalités IA et intégrations LLM dans des projets clients.',
-        'Participation aux audits de sécurité, aux corrections et à l’optimisation des performances.'
+        'Développement d’applications web, microservices, API REST et e-commerce Magento 2.',
+        'Contribution aux plateformes Atol.fr et Elite-Auto.fr avec React, Angular, NestJS et Magento.',
+        'Conception d’API sécurisées connectées à PostgreSQL, MySQL et MongoDB.',
+        'Optimisation des performances et livraisons en environnement Agile.'
       ],
       Designet: [
-        'Formation au développement MERN : MongoDB, Express, React et Node.js.',
-        'Enseignement des API REST, de l’authentification et des architectures évolutives.',
-        'Accompagnement des étudiants sur des projets full-stack concrets.'
+        'Animation de formations en ligne sur l’écosystème MERN.',
+        'Enseignement des API REST, de Redux, Context API, JWT/OAuth2 et de la sécurité.',
+        'Accompagnement des apprenants sur des architectures full-stack évolutives.'
       ],
       Weecode: [
-        'Livraison d’applications web et mobiles full-stack pour des clients.',
-        'Collaboration sur la réalisation de fonctionnalités et l’optimisation de produits.'
+        'Architecture et développement de solutions full-stack pour des clients internationaux.',
+        'Travail avec React, Node.js, Express.js, TypeScript et PostgreSQL.',
+        'Audit technique, optimisation des bases de données et résolution de problèmes de performance.'
       ]
     },
     allProjects: 'TOUT',
@@ -655,7 +673,11 @@ const About = ({ locale, personalInfo }) => {
 
 const Experience = ({ locale, experience }) => {
   const t = translations[locale];
-  const companies = ['IoTechnologies', 'Designet', 'Weecode'];
+  const companies = [
+    'SARL STE FLOWTEK CONSULTING',
+    'SOCIÉTÉ IOLABS TECHNOLOGIES',
+    'Innsyapp'
+  ];
   const companyEntries = companies
     .map((company) => experience.find((item) => item.company === company))
     .filter(Boolean);
@@ -667,9 +689,9 @@ const Experience = ({ locale, experience }) => {
       : selectedExperience.description)
     : [];
   const roleLabels = {
-    IoTechnologies: t.roleIo,
-    Designet: t.roleDesignet,
-    Weecode: t.roleWeecode
+    'SARL STE FLOWTEK CONSULTING': 'Ingénieur Full Stack',
+    'SOCIÉTÉ IOLABS TECHNOLOGIES': 'Ingénieur Full Stack (MERN / Angular / PHP)',
+    Innsyapp: 'Développeur Full Stack'
   };
   const icons = [Layers, Activity, GitBranch];
 
@@ -865,7 +887,8 @@ const Projects = ({ locale, projects, githubUrl }) => {
     All: t.allProjects,
     ERP: t.erp,
     'E-Commerce': t.ecommerce,
-    'AI & Analytics': t.aiAnalytics
+    'AI & Analytics': t.aiAnalytics,
+    Other: t.otherProjects
   };
   const projectCategoryLabel = (category) => ({
     ERP: t.erp,
@@ -1245,8 +1268,12 @@ const Contact = ({ locale, personalInfo }) => {
             <div className="flex flex-col gap-3 sm:flex-row">
               <button type="submit" className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-primary-600 px-5 py-3.5 text-sm font-bold text-white shadow-lg shadow-primary-900/15 transition hover:-translate-y-0.5 hover:bg-primary-700">
                 <Send size={16} /> {t.sendMessage}
+             
               </button>
-              <a href={`mailto:${personalInfo.email}?subject=${encodeURIComponent(t.scheduleMeeting)}`} className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white/70 px-5 py-3.5 text-sm font-bold text-slate-700 transition hover:border-primary-300 hover:text-primary-700 dark:border-slate-700 dark:bg-slate-800/70 dark:text-slate-200 dark:hover:text-primary-300">
+              <a
+                href={`mailto:${personalInfo.email}?subject=${encodeURIComponent(t.scheduleMeeting)}`}
+                className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white/70 px-5 py-3.5 text-sm font-bold text-slate-700 transition hover:border-primary-300 hover:text-primary-700 dark:border-slate-700 dark:bg-slate-800/70 dark:text-slate-200 dark:hover:text-primary-300"
+              >
                 <CalendarDays size={16} /> {t.scheduleMeeting}
               </a>
             </div>
@@ -1821,14 +1848,11 @@ const AdminPanel = ({
               </div>
             </div>
 
-            <div className="grid gap-8 lg:grid-cols-2">
+            <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
               <form onSubmit={handleExperienceSave} className="rounded-2xl border border-slate-200 bg-slate-50 p-5 dark:border-slate-700 dark:bg-slate-800/60">
-                <div className="mb-5 flex items-center justify-between gap-3">
-                  <div className="flex items-center gap-2 text-slate-900 dark:text-white">
-                    <Briefcase size={18} className="text-primary-500" />
-                    <h4 className="text-xl font-semibold">Experience</h4>
-                  </div>
-                  <button type="button" onClick={() => { setExperienceDraft(makeEmptyExperience()); setEditingExperienceId(null); }} className="rounded-lg border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 dark:border-slate-600 dark:text-slate-200">New entry</button>
+                <div className="mb-5 flex items-center gap-2 text-slate-900 dark:text-white">
+                  <Briefcase size={18} className="text-primary-500" />
+                  <h4 className="text-xl font-semibold">Experience</h4>
                 </div>
 
                 <div className="space-y-4">

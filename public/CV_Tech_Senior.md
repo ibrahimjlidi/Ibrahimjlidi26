@@ -1,103 +1,102 @@
-# Curriculum Vitae
+# IBRAHIM JLIDI
 
-## Ibrahim Jlidi
+**INGÉNIEUR FULL STACK**
 
-Full Stack Developer
+Développement web · Architecture logicielle · Intelligence artificielle
 
-+21623844641
+Tunisie | +216 23 844 641 | ibrahimjlidi23@gmail.com
 
-ibrahimjlidi23@gmail.com
+Portfolio : https://portfolio2026-six-vert.vercel.app
+LinkedIn : https://linkedin.com/in/ibrahimjlidi
+GitHub : https://github.com/ibrahimjlidi
 
-ibrahimjlidi-portfolio.netlify.app
+## PROFIL PROFESSIONNEL
 
-github.com/ibrahimjlidi
+Ingénieur Full Stack expérimenté dans la conception et le développement d’applications web, notamment pour des clients français. Spécialisé en React.js, Angular, Node.js, NestJS et TypeScript, j’interviens sur les développements frontend et backend, la conception d’API REST ainsi que l’évolution d’architectures microservices. Mon parcours comprend également l’encadrement technique de développeurs, l’optimisation des performances et l’intégration de solutions d’intelligence artificielle, notamment à travers le développement d’agents IA.
 
-linkedin.com/in/ibrahimjlidi
+## RÉALISATIONS CLÉS
 
----
+- Réduction de 60 % du temps de déploiement grâce à la mise en place de pipelines CI/CD.
+- Amélioration de 35 % du temps de réponse des API après évolution de l’architecture vers les microservices.
+- Développement et intégration d’agents IA dans des applications web existantes.
 
-## Summary
+## COMPÉTENCES TECHNIQUES
 
-Full Stack Developer with solid experience in Adobe Commerce (Magento 2) and Hyvä Theme frontend development. Skilled in JavaScript, Alpine.js, Tailwind CSS, and PHP. Hands-on experience with CMS blocks, widgets, and search integrations. Passionate about building performant, responsive, and user-centered e-commerce experiences.
+- Frontend : React.js, Next.js, Angular, Tailwind CSS, SCSS, HTML5, CSS3, Alpine.js, Hyvä Theme, RxJS
+- Backend & API : Node.js, NestJS, Express.js, PHP, Symfony, API REST
+- Langages : JavaScript (ES6+), TypeScript, PHP, C#, SQL
+- Architecture logicielle : Microservices, Clean Architecture, Design Patterns
+- Intelligence artificielle : API OpenAI, intégration de fonctionnalités IA, conception et développement d’agents IA
+- Bases de données : MongoDB, PostgreSQL, SQL Server
+- DevOps & outils : Docker, Git, GitLab CI/CD, Postman, Jira, Cursor, GitHub Copilot
+- Méthodes : Agile, Scrum, revues de code
 
----
+## EXPÉRIENCES PROFESSIONNELLES
 
-## Education
+### Ingénieur Full Stack
+Juil. 2025 – Nov. 2026 | SARL STE FLOWTEK CONSULTING · Temps plein, Sur site
+- Conception et déploiement de solutions web full-stack et d'API RESTful sous TypeScript, Node.js, NestJS et PHP.
+- Conteneurisation des environnements de développement et services avec Docker pour uniformiser les pipelines CI/CD.
+- Pilotage des optimisations de performance, du refactoring et des évolutions fonctionnelles pour Atol.fr et Elite-Auto.fr.
+- Collaboration étroite avec les chefs de produit et équipes pluridisciplinaires pour traduire les besoins métiers et SaaS en composants modulaires.
 
-**Master’s in Software Engineering and Knowledge**
-September 2019 - August 2021
-ISIMED, Medenine
-- Focused on advanced web technologies and enterprise application design.
-- Hands-on experience with ReactJS, Angular, and HTML/CSS/JAVASCRIPT.
+### Ingénieur Full Stack (MERN / Angular / PHP)
+Sept. 2022 – Juin 2025 | SOCIÉTÉ IOLABS TECHNOLOGIES · Temps plein, Sur site (Médenine, Tunisie)
+- Développement et maintenance d'applications web et microservices avec TypeScript, React, Angular, NestJS, Node.js et Magento 2 (Hyvä Theme).
+- Contribution majeure à Atol.fr et Elite-Auto.fr.
+- Conception et sécurisation d'API RESTful connectées à PostgreSQL, MySQL et MongoDB.
+- Migration d'une architecture monolithique vers des microservices (+35 % de rapidité sur les API) et maintien des pipelines CI/CD avec Docker et Git.
 
-**Bachelor’s in Computer Science**
-September 2015 - June 2018
-ISIMED, Medenine
-- Strong foundation in Java, PHP, and web development.
+### Développeur Full Stack
+Juin 2020 – Août 2022 | Innsyapp · Freelance | Tunisie
+- Développement de modules web en PHP, JavaScript et MySQL dans le cadre de projets clients.
+- Participation aux cycles Agile : sprints, réunions quotidiennes et rétrospectives.
+- Débogage et optimisation de modules existants avec une réduction annoncée moyenne de 25 % des temps de chargement.
+- Montée en compétences sur React.js et Node.js selon les besoins des projets.
 
----
+## PROJETS SÉLECTIONNÉS
 
-## Professional Experience
+### EduInsight – Plateforme analytics & IA éducative
+React.js, Node.js, MongoDB, API OpenAI, Tailwind CSS
+Plateforme EdTech intégrant l’API OpenAI pour générer des quiz adaptatifs, analyser la progression et proposer des recommandations personnalisées.
+https://eduinsightfrontend.vercel.app
 
-### Instructor | Designet (Remote)
-January 2025 – Present
-- MERN Stack Training.
-- Conducted online MERN stack training sessions covering REST APIs, state management, and deployment.
-- Guided students in building real-world applications using MongoDB, Express.js, React, and Node.js.
+### Elite-Auto – Écosystème web
+Angular, TypeScript, RxJS, NestJS, SQL Server, Docker
+Architecture microservices backend pour un portail automobile à fort trafic. Réduction de 40 % des temps de chargement grâce au lazy loading et à l’optimisation des requêtes SQL.
+https://www.elite-auto.fr
 
-### Freelance Developer | Weecode (Remote)
-November 2023 – Present
-- Developed and maintained full-stack web and mobile projects for international clients.
-- Collaborated with design teams and handled project debugging, code review, and optimization.
+### Atol.fr – Plateforme e-commerce
+Magento 2, Hyvä Theme, Tailwind CSS, Alpine.js, PHP, Node.js
+Optimisation du frontend avec Hyvä Theme : score Lighthouse passé de 54 à 91. Intégration de modules REST et améliorations SEO techniques.
+https://www.atol.fr
 
-### Web Developer | IoTechnologies (Medenine / Remote)
-September 2022 – Present
-- Developed and maintained Magento 2 e-commerce applications with a focus on the Hyvä frontend framework.
-- Implemented modern, responsive UIs using Tailwind CSS and Alpine.js.
-- Integrated Algolia Search and Autocomplete for advanced product discovery.
-- Created custom Hyvä widgets and CMS blocks (Magefan Blog, banners, sliders).
-- Designed and implemented a responsive multi-level mobile mega menu using Alpine.js.
-- Optimized performance, accessibility, and SEO metrics (Lighthouse audits).
-- Atol.fr Project: Magento-based e-commerce platform with custom Tailwind design and module integrations.
-- Elite-Auto.fr Project: Angular + NestJS automotive platform with Tailwind styling and secure REST APIs.
+### FuelStation ERP – Gestion de stations-service
+React.js, Node.js, Express.js, MongoDB, Tailwind CSS, Docker
+ERP couvrant le suivi des stocks de carburant, la gestion des pompes, la caisse, un module kiosque et un tableau de bord en temps réel.
+https://kiosk-tunisia.vercel.app/login
 
-### Freelance Developer | Personal Projects (Remote)
-June 2020 – August 2022
-- Designed and developed custom websites and small business applications for local clients.
-- Built responsive frontends using HTML, CSS, JavaScript, and Tailwind CSS.
-- Integrated PHP backends and REST APIs for user management and contact systems.
-- Created custom CMS themes and landing pages for improved user experience and branding.
-- Worked directly with clients for requirement gathering, UI/UX improvements, and deployment.
+### NovaStore – Gestion de stock et des ventes
+React.js, Node.js, Express.js, MongoDB, Tailwind CSS, Docker
+Application bilingue arabe/français de gestion de stock et des ventes pour les commerces de détail.
+https://novastore-black.vercel.app
 
----
+## FORMATION
 
-## Projects
+**Master en Génie logiciel & Ingénierie des connaissances (Bac+5)**
+ISIMED | 2019–2021
+Architecture logicielle avancée, Clean Architecture, IA. PFE : Jood, application mobile cross-platform (React Native, Node.js, Firebase).
 
-- **Custom Hyvä Widgets and CMS Blocks**
-  - Developed reusable Hyvä widgets (banners, buttons, sliders) with Alpine.js and Tailwind CSS.
-  - Integrated Magefan Blog widgets and CMS blocks for dynamic content management in Magento 2.
-  - Technologies: Magento 2, PHP, Hyvä Theme, Alpine.js, Tailwind CSS.
+**Licence en Sciences de l’informatique (Bac+3)**
+ISIMED | 2015–2018
+Algorithmique, programmation orientée objet (Java, C++), bases de données. PFE : agent IA en Python pour le diagnostic automatique de pannes automobiles.
 
-- **Mobile Mega Menu Integration**
-  - Implemented a responsive multi-level mega menu with Alpine.js, handling submenu navigation and CMS-driven content for Magento Hyvä.
-  - Technologies: Magento 2, Hyvä, Alpine.js, Tailwind CSS.
+## LANGUES
 
----
+- Arabe : langue maternelle
+- Français : niveau professionnel / technique
+- Anglais : niveau professionnel / technique
 
-## Technical Skills
+Références disponibles sur demande
 
-- **Frontend**: Tailwind CSS, Alpine.js, React.js, Angular, HTML5, CSS3, JavaScript
-- **Backend**: PHP, Node.js, Express.js, NestJS
-- **CMS / E-commerce**: Magento 2, Hyvä Theme, WordPress, Magefan Blog
-- **Tools**: Git, GitHub, GitLab, Docker, VS Code, Postman
-- **Databases**: MySQL, PostgreSQL, MongoDB
-- **Other**: REST APIs, Performance Optimization, SEO Best Practices
-
----
-
-## Languages
-
-- Arabic – Native
-- English – Intermediate (Good reading/writing, improving speaking)
-- French – Intermediate (Good reading/writing, improving speaking)
-- Italian – A1/A2 Level
+Permis B
